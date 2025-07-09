@@ -1,15 +1,16 @@
 #include "MainGame.h"
+#include <time.h>
 
-void main()
+int main()
 {
 	// 커서 안보이게
+	srand(time(NULL));
 	CONSOLE_CURSOR_INFO c = { 0 };
 	c.dwSize = 1;
 	c.bVisible = 0; 
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &c); 
 
-	GameManager mg;
-	mg.GameStart();
-	return;
+	MainGame mg;
+	return 0;
 }
 

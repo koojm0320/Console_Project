@@ -15,7 +15,8 @@ class GameManager
 	ScreenDot* _screenDot;
 
 	int playerLife;
-	int invincibleTimer;
+	int playerInvincibleTimer;
+	int bossInvincibleTimer;
 
 	int WDLife;
 	int const ENEMY_KILL_COUNT = 10;

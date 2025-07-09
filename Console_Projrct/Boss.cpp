@@ -3,7 +3,6 @@
 
 
 
-
 Boss::Boss()
 {
 	_alive = true;
@@ -17,6 +16,8 @@ Boss::Boss()
 
 	_patternTimer = 0;
 	_currentPattern = 0;
+
+	_bossMoveTimer = 0;
 }
 
 Boss::~Boss()
@@ -28,7 +29,7 @@ Boss::~Boss()
 void Boss::Daroach()
 {
 	_x = 150;
-	_y = 16;
+	// _y = 16;
 	// _dot->Daroach(_x, _y);
 
 	if (!_alive)
@@ -91,10 +92,13 @@ void Boss::BossLaserLogic()
 			_bossProjectile[i].x += static_cast<int>(_bossProjectile[i].dx);
 			_bossProjectile[i].y += static_cast<int>(_bossProjectile[i].dy);
 		
-			if (_bossProjectile[i].x < 0 || 
-				_bossProjectile[i].x > 180 || 
-				_bossProjectile[i].y < 0 || 
-				_bossProjectile[i].y > 180)
+			if (_bossProjectile[i].y < 1 || _bossProjectile[i].y > 45)
+			{
+				_bossProjectile[i].dy *= -1;
+			}
+
+
+			if (_bossProjectile[i].x < 1)
 			{
 				_bossProjectile[i].activate = false;
 			}
@@ -104,8 +108,8 @@ void Boss::BossLaserLogic()
 
 void Boss::UpdatePattern()
 {
-	_patternTimer = 0;
-	if (_patternTimer > 100)
+	_patternTimer++;
+	if (_patternTimer > 200)
 	{
 		_patternTimer = 0;
 		_currentPattern = (_currentPattern + 1) % 2;
@@ -125,34 +129,48 @@ void Boss::UpdatePattern()
 // 일직선 발사
 void Boss::BossPattern1()
 {
-	static double angle = 0.0;
-	if (_patternTimer % 30 == 0)
+	static double verticalSpeed = 0.0;
+	static int direction = 1;
+
+	if (_patternTimer % 10 == 0)
 	{
-		double speed = 2.0;
+		double dx = -2.0;
+		double dy = verticalSpeed;
 
-		double dx = cos(angle) * speed;
-		double dy = sin(angle) * speed;
-		_bossProjectile.push_back(BossProjectile(_x, _y + 8, dx, dy));
+		_bossProjectile.push_back(BossProjectile(_x - 10, _y + 8, dx, dy));
 
-		angle += 0.5;
+		verticalSpeed += 0.2 * direction;
 
-		/*if (angle > 90)
+		if (verticalSpeed > 1.5 || verticalSpeed < -1.5)
 		{
-			angle -= 0.5;
+			direction *= -1;
 		}
-		else if (angle < -90)
-		{
-			angle += 0.5;
-		}*/
+
 	}
 }
 
 // 나선형 발사
 void Boss::BossPattern2()
 {
-	if (_patternTimer % 60 == 0)
+	if (_patternTimer % 40 == 0)
 	{
+		_bossProjectile.push_back(BossProjectile(_x, _y + 8, -3.0, -1.0));
+
 		_bossProjectile.push_back(BossProjectile(_x, _y + 8, -3.0, 0.0));
+
+		_bossProjectile.push_back(BossProjectile(_x, _y + 8, -3.0, 1.0));
+	}
+}
+
+void Boss::RandMove()
+{
+	_bossMoveTimer++;
+
+	if (_bossMoveTimer > 120)
+	{
+		_bossMoveTimer = 0;
+
+		_y = (rand() % 26) + 5;
 	}
 }
 

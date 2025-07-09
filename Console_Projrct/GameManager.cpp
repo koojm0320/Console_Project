@@ -4,12 +4,13 @@
 GameManager::GameManager()
 {
 	playerLife = 2;
-	invincibleTimer = 0;
+	playerInvincibleTimer = 0;
+	bossInvincibleTimer = 0;
 	WDLife = 1;
 
 	killCount = 0;
 
-	daroachLife = 9;
+	daroachLife = 19;
 	metaKnightLife = 19;
 
 	isCollide = false;
@@ -109,10 +110,10 @@ void GameManager::GameStart()
 			}
 		}
 		// 무적 시간(프레임)
-		if (invincibleTimer)
+		if (playerInvincibleTimer)
 		{
-			invincibleTimer--;
-			if (invincibleTimer <= 0)
+			playerInvincibleTimer--;
+			if (playerInvincibleTimer <= 0)
 			{
 				playerInvincible = false;
 			}
@@ -125,7 +126,7 @@ void GameManager::GameStart()
 				_player->PlayerHit();
 				playerLife--;
 				playerInvincible = true;
-				invincibleTimer = 100;
+				playerInvincibleTimer = 100;
 			}
 			else
 			{
@@ -178,6 +179,9 @@ void GameManager::BossStage1()
 		HitBox();
 		CollisionDec();
 
+		cursorXY(75, 1);
+		cout << "- 수수께끼 도적단 도팡 - ";
+
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
 			Sleep(100);
@@ -189,6 +193,7 @@ void GameManager::BossStage1()
 		_boss->Daroach();
 		_boss->BossLaserLogic();
 		_boss->UpdatePattern();
+		_boss->RandMove();
 
 		// ========================== boss 피격 애니메이션 ======================
 		if (_boss->isAlive())
@@ -211,12 +216,22 @@ void GameManager::BossStage1()
 		}
 
 		// boss 피격무적 판정
-		if (invincibleTimer)
+		if (bossInvincibleTimer)
 		{
-			invincibleTimer--;
-			if (invincibleTimer <= 0)
+			bossInvincibleTimer--;
+			if (bossInvincibleTimer <= 0)
 			{
 				bossInvincible = false;
+			}
+		}
+
+		// plaer 피격무적 판정
+		if (playerInvincibleTimer)
+		{
+			playerInvincibleTimer--;
+			if (playerInvincibleTimer <= 0)
+			{
+				playerInvincible = false;
 			}
 		}
 		// ========================= playerLaser -> Boss 피격 =========================
@@ -241,13 +256,13 @@ void GameManager::BossStage1()
 			{
 				_player->getLaser()[i].activate = false;
 
-				if (daroachLife > 0 && daroachLife < 10)
+				if (daroachLife > 0 && daroachLife < 20)
 				{
 					bossHitEffectTimer = 5;
 					_boss->DaroachHit();
 					daroachLife--;
 					bossInvincible = true;
-					invincibleTimer = 10;
+					bossInvincibleTimer = 10;
 				}
 				else
 				{
@@ -297,8 +312,8 @@ void GameManager::BossStage1()
 			if (projectiles[i].activate)
 			{
 				cursorXY(projectiles[i].x, projectiles[i].y);
-				TextColor(4, 0);
-				cout << "●";
+				TextColor(4, 4);
+				cout << "ㅁ";
 				TextColor(7, 0);
 			}
 		}
@@ -308,14 +323,14 @@ void GameManager::BossStage1()
 		for (int i = 0; i < daroachLife + 1; i++)
 		{
 			TextColor(4, 4);
-			cursorXY(60 + i * 2, 2);
+			cursorXY(67 + i * 2, 2);
 			printf("ㅁ");
 			TextColor(7, 0);
 		}
-		for (int i = daroachLife + 1; i < 10; i++)
+		for (int i = daroachLife + 1; i < 20; i++)
 		{
 			TextColor(8, 8);
-			cursorXY(60  + i * 2, 2);
+			cursorXY(67  + i * 2, 2);
 			printf("ㅁ");
 			TextColor(7, 0);
 		}
@@ -327,7 +342,7 @@ void GameManager::BossStage1()
 				_player->PlayerHit();
 				playerLife--;
 				playerInvincible = true;
-				invincibleTimer = 100;
+				playerInvincibleTimer = 10;
 			}
 			else
 			{
@@ -372,10 +387,10 @@ void GameManager::BossStage2()
 		_boss->MetaKnight();
 
 
-		if (invincibleTimer)
+		if (bossInvincibleTimer)
 		{
-			invincibleTimer--;
-			if (invincibleTimer <= 0)
+			bossInvincibleTimer--;
+			if (bossInvincibleTimer <= 0)
 			{
 				bossInvincible = false;
 			}

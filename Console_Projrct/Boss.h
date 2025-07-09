@@ -21,6 +21,8 @@ private:
 	bool _alive;
 	bool _isHit;
 
+	int _bossMoveTimer;
+
 	int _patternTimer;   // 패턴 내부 타이머
 	int _currentPattern; // 현재 실행 중인 패턴 번호
 
@@ -58,6 +60,8 @@ public:
 
 	void BossPattern1();
 	void BossPattern2();
+
+	void RandMove();
 
 	Boss();
 	~Boss();
