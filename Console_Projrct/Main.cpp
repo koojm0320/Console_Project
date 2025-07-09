@@ -9,7 +9,7 @@ void main()
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &c); 
 
 	GameManager mg;
-	mg.BossStage1();
+	mg.GameStart();
 	return;
 }
 

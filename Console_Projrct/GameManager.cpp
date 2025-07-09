@@ -43,13 +43,13 @@ GameManager::~GameManager()
 void GameManager::GameStart()
 {
 
-
 	const int lifeCount = 3;
 	playerInvincible = false;
 
 
 	while (true)
 	{
+		system("cls");
 		HitBox();
 		CollisionDec();
 
