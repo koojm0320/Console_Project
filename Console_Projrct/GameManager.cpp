@@ -229,7 +229,7 @@ void GameManager::BossStage1()
 					cursorXY(80, 20);
 					printf("STAGE CLEAR!");
 					Sleep(2000);
-					break;
+					return;
 				}
 				// if ±¸¿ª
 			}
