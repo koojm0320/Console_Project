@@ -27,6 +27,7 @@ void Player::MoveLogic()
 	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 		system("pause");
 
+	// player ¿Ãµø
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000) _x -= 2;
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000) _x += 2;
 	if (GetAsyncKeyState(VK_UP) & 0x8000) --_y;
@@ -38,7 +39,7 @@ void Player::MoveLogic()
 	if (_y < 1) _y = 1;
 	if (_y > 44) _y = 44;
 
-	system("cls");
+	//system("cls");
 	_dot->kirby(_x, _y);
 	
 	//shooterX += 4;
@@ -75,7 +76,7 @@ void Player::LaserLogic()
 {
 	static int laserFireTimer = 0;
 	laserFireTimer++;
-	if (laserFireTimer >= 30)
+	if (laserFireTimer >= 10)
 	{
 		_laser.push_back(Laser(_x + 12, _y + 2));
 		laserFireTimer = 0;

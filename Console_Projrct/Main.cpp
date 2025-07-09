@@ -8,7 +8,8 @@ void main()
 	c.bVisible = 0; 
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &c); 
 
-	MainGame mg;
+	GameManager mg;
+	mg.BossStage1();
 	return;
 }
 

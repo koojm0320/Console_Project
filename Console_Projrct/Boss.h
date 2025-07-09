@@ -1,6 +1,16 @@
 #pragma once
 #include "Dot.h"
 
+struct BossProjectile
+{
+	int x, y;
+	double dx, dy;
+	bool activate;
+
+	BossProjectile(int startX, int startY, double dirX, double dirY) :
+		x(startX), y(startY), dx(dirX), dy(dirY), activate(true) {};
+};
+
 class Boss
 {
 private:
@@ -9,6 +19,12 @@ private:
 	int _y;
 
 	bool _alive;
+	bool _isHit;
+
+	int _patternTimer;   // 패턴 내부 타이머
+	int _currentPattern; // 현재 실행 중인 패턴 번호
+
+	vector<BossProjectile> _bossProjectile;
 
 	int shooterX;
 	int shooterY;
@@ -20,12 +36,13 @@ public:
 
 	void Die();
 	bool isAlive() const { return _alive; }
+	
+	// 피격 getter setter
+	bool isHit() const { return _isHit; }
+	void setHit(bool isHit) { _isHit = isHit; }
 
 	void Daroach();
 	void MetaKnight();
-
-	int BshooterGetX() { return shooterX; }
-	int BshooterGetY() { return shooterY; }
 
 	void DaroachHit();
 	void DaroachClear();
@@ -34,7 +51,13 @@ public:
 	void MetaKnightClear();
 	
 
-	void Pattern1();
+	vector<BossProjectile>& getBossProjectile();
+
+	void UpdatePattern();
+	void BossLaserLogic();
+
+	void BossPattern1();
+	void BossPattern2();
 
 	Boss();
 	~Boss();
