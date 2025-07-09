@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Project">
+      <UniqueIdentifier>{c6ff64c4-1c45-4a5d-855d-c4e301dd23dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\헤더 파일">
+      <UniqueIdentifier>{1a951c99-f4c6-4fde-b405-0e01e4ed0cfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\소스 파일">
+      <UniqueIdentifier>{2ed93222-48bc-4227-975b-2467ccc66e47}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Dot.h">
+      <Filter>Project\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>Project\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Project\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Project\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Project\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Project\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelect.h">
+      <Filter>Project\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Project\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Project\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Project\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameWinOrLose.h">
+      <Filter>Project\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenDot.h">
+      <Filter>Project\헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Dot.cpp">
+      <Filter>Project\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>Project\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Project\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Project\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Project\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Project\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="StageSelect.cpp">
+      <Filter>Project\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Project\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Project\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Project\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameWinOrLose.cpp">
+      <Filter>Project\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenDot.cpp">
+      <Filter>Project\소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="메모.txt">
+      <Filter>Project</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
