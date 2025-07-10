@@ -4,8 +4,9 @@
 #include "ScreenDot.h"
 #include <iostream>
 #include <Windows.h>
+#include <string>
 
-using namespace std;
+//using namespace std;
 
 class Menu
 {
@@ -22,6 +23,7 @@ private:
 public:
 	void explane();
 	void printMenu();
+
 	Menu();
 	~Menu();
 };

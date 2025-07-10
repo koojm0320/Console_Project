@@ -1,6 +1,8 @@
 #include "GameManager.h"
 #include "Common.h"
 
+bool GameManager::StageClear[4]{ false, false ,false ,false };
+
 GameManager::GameManager()
 {
 	playerLife = 0;
@@ -43,7 +45,7 @@ GameManager::~GameManager()
 //============================== 1-1 ============================
 void GameManager::Stage1_1()
 {
-
+	killCount = 0;
 	const int lifeCount = 3;
 	playerInvincible = false;
 	playerLife = 2;
@@ -155,6 +157,7 @@ void GameManager::Stage1_1()
 		{
 			system("cls");
 			playerLife = 2;
+			StageClear[0] = true;
 			cursorXY(80, 20);
 			printf("STAGE CLEAR!");
 			Sleep(2000);
@@ -171,7 +174,7 @@ void GameManager::Stage1_1()
 //============================== 2-1 ============================
 void GameManager::Stage2_1()
 {
-
+	killCount = 0;
 	const int lifeCount = 3;
 	playerInvincible = false;
 	playerLife = 2;
@@ -283,6 +286,7 @@ void GameManager::Stage2_1()
 		{
 			system("cls");
 			playerLife = 2;
+			StageClear[1] = true;
 			cursorXY(80, 20);
 			printf("STAGE CLEAR!");
 			Sleep(2000);
@@ -402,6 +406,7 @@ void GameManager::BossStage1()
 					_boss->Die();
 					_boss->DaroachClear();
 					system("cls");
+					StageClear[2] = true;
 					cursorXY(80, 20);
 					printf("STAGE CLEAR!");
 					Sleep(2000);
@@ -610,6 +615,7 @@ void GameManager::BossStage2()
 					_boss->Die();
 					_boss->MetaKnightClear();
 					system("cls");
+					StageClear[3] = true;
 					cursorXY(80, 20);
 					printf("STAGE CLEAR!");
 					Sleep(2000);

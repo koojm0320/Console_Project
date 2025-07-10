@@ -56,6 +56,16 @@ void StageSelect::StageRun()
 		}
 		else if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 		{
+			if (selectStage > 0 && !GameManager::StageClear[selectStage - 1])
+			{
+				cursorXY(68, 7);
+				TextColor(4, 7);
+				cout << "이전 스테이지를 클리어해야 입장 가능합니다!";
+				TextColor(7, 0);
+				Sleep(2000);
+				continue;
+			}
+
 			int stageNum = (selectStage / 2) + 1;
 			int levelNum = (selectStage % 2) + 1;
 			if (stageNum == 1)

@@ -30,14 +30,14 @@ public:
 	vector<TrashMob>& getTrashMob();
 	void EnemySpawnLogic();
 
-	void Die();
+	// void Die();
 	bool isAlive() const { return _alive; }
 	
 	// void ResetEnemy();
 	// void Respawn();
 
-	void WaddleDee();
-	void WaddleDeeHit();
+	// void WaddleDee();
+	// void WaddleDeeHit();
 
 	Enemy();
 	~Enemy();

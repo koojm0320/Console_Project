@@ -402,12 +402,87 @@ void Dot::LifeDec(short posX, short posY)
 
 void Dot::HPUp(short posX, short posY)
 {
-}
+    _hpUp = {
+        {4,0,4},
+        {4,4,4},
+        {0,4,0}
+    };
 
-void Dot::AtkSpeedUp(short posX, short posY)
-{
+    for (unsigned int i = 0; i < _hpUp.size(); i++)
+    {
+        cursorXY(posX, posY + i);
+        for (unsigned int j = 0; j < _hpUp[i].size(); j++)
+        {
+            int colorNum = _hpUp[i][j];
+
+            if (colorNum > 16 || colorNum < 0)
+            {
+                TextColor(7, 0);
+            }
+            else
+            {
+                TextColor(colorNum, colorNum);
+            }
+            cout << "¤±";
+        }
+        TextColor(7, 0);
+    }
 }
 
 void Dot::AtkPowerUp(short posX, short posY)
 {
+    _atkPowerUp = {
+        {13,13,13},
+        {0,13,0},
+        {13,13,13}
+    };
+
+    for (unsigned int i = 0; i < _atkPowerUp.size(); i++)
+    {
+        cursorXY(posX, posY + i);
+        for (unsigned int j = 0; j < _atkPowerUp[i].size(); j++)
+        {
+            int colorNum = _atkPowerUp[i][j];
+
+            if (colorNum > 16 || colorNum < 0)
+            {
+                TextColor(7, 0);
+            }
+            else
+            {
+                TextColor(colorNum, colorNum);
+            }
+            cout << "¤±";
+        }
+        TextColor(7, 0);
+    }
+}
+
+void Dot::AtkSpeedUp(short posX, short posY)
+{
+    _atkSpeedUp = {
+        {11,11,11},
+        {0,11,0},
+        {11,11,11}
+    };
+
+    for (unsigned int i = 0; i < _atkSpeedUp.size(); i++)
+    {
+        cursorXY(posX, posY + i);
+        for (unsigned int j = 0; j < _atkSpeedUp[i].size(); j++)
+        {
+            int colorNum = _atkSpeedUp[i][j];
+
+            if (colorNum > 16 || colorNum < 0)
+            {
+                TextColor(7, 0);
+            }
+            else
+            {
+                TextColor(colorNum, colorNum);
+            }
+            cout << "¤±";
+        }
+        TextColor(7, 0);
+    }
 }

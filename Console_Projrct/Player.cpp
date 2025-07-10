@@ -45,7 +45,7 @@ void Player::LaserLogic()
 {
 	static int laserFireTimer = 0;
 	laserFireTimer++;
-	if (laserFireTimer >= 30)
+	if (laserFireTimer >= 5)
 	{
 		_laser.push_back(Laser(_x + 12, _y + 2));
 		laserFireTimer = 0;

@@ -59,6 +59,8 @@ class GameManager
 	int laserHeight;
 
 public:
+	static bool StageClear[4];
+
 	void Stage1_1();
 	void Stage2_1();
 	void BossStage1();
