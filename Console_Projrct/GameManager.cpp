@@ -155,6 +155,7 @@ void GameManager::Stage1_1()
 
 		if (killCount >= ENEMY_KILL_COUNT)
 		{
+			Sleep(2000);
 			system("cls");
 			playerLife = 2;
 			StageClear[0] = true;
@@ -286,7 +287,7 @@ void GameManager::Stage2_1()
 		{
 			system("cls");
 			playerLife = 2;
-			StageClear[1] = true;
+			StageClear[2] = true;
 			cursorXY(80, 20);
 			printf("STAGE CLEAR!");
 			Sleep(2000);
@@ -406,7 +407,7 @@ void GameManager::BossStage1()
 					_boss->Die();
 					_boss->DaroachClear();
 					system("cls");
-					StageClear[2] = true;
+					StageClear[1] = true;
 					cursorXY(80, 20);
 					printf("STAGE CLEAR!");
 					Sleep(2000);

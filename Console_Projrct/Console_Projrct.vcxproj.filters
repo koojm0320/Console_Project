@@ -45,9 +45,6 @@
     <ClInclude Include="GameManager.h">
       <Filter>Project\헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameWinOrLose.h">
-      <Filter>Project\헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="ScreenDot.h">
       <Filter>Project\헤더 파일</Filter>
     </ClInclude>
@@ -84,9 +81,6 @@
       <Filter>Project\소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
-      <Filter>Project\소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameWinOrLose.cpp">
       <Filter>Project\소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">

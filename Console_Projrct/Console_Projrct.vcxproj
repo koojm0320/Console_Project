@@ -24,7 +24,6 @@
     <ClInclude Include="Dot.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="GameWinOrLose.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
@@ -41,7 +40,6 @@
     </ClCompile>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="GameWinOrLose.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Menu.cpp" />

@@ -11,6 +11,7 @@ class StageSelect
 private:
 	Stage* _stage;
 	Dot* _dot;
+	ScreenDot* _screenDot;
 	int stageCount;
 	int selectStage;
 	const int stagePosX[4] = { 30, 60, 120, 150 };

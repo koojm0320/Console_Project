@@ -92,47 +92,18 @@ void Menu::explane()
 	system("cls");
 	_screenDot->ExplaneScreen();
 
-	const int explaneCount = 5;
-	string explane[explaneCount] = {
-		" HOW TO PLAY ",
-		" 조작: 방향키(←,→,↑,↓) ",
-		" 공격: 자동 발사 ",
-		" 스테이지 선택: SPACE ",
-		" 되돌아가려면 ESC를 누르세요 "
-	};
-
-
 	while (true)
 	{
-		cursorX = 75;
-		cursorY = 20;
-		for (int i = 0; i < explaneCount; i++)
-		{
-			TextColor(7, 0);
-			cursorXY(cursorX, cursorY + (i * 2) - 2);
-			cout << explane[i];
-		}
-
+	
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
 			TextColor(7, 0);
 			system("cls");
 			break;
 		}
-
+	
 		Sleep(50);
 	}
-	//TextColor(7, 0);
-	//cursorXY(81, 10);
-	//cout << "  HOW TO PLAY  \n";
-	//cout << "  조작: 방향키(←,→,↑,↓)  \n";
-	////cursorXY(75, 15);
-	////cursorXY(80, 20);
-	////cursorXY(78, 25);
-	////cursorXY(74, 30);
-	//cout << "  공격: 자동 발사  \n";
-	//cout << "  스테이지 선택: SPACE  \n";
-	//cout << "  되돌아가려면 ESC를 누르세요.  \n";
 
 }
 

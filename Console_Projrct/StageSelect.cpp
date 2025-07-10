@@ -7,6 +7,7 @@ StageSelect::StageSelect()
 {
 	_stage = new Stage;
 	_dot = new Dot;
+	_screenDot = new ScreenDot;
 	stageCount = 4;
 	selectStage = 0;
 }
@@ -15,6 +16,7 @@ StageSelect::~StageSelect()
 {
 	delete _dot;
 	delete _stage;
+	delete _screenDot;
 }
 
 
@@ -77,7 +79,30 @@ void StageSelect::StageRun()
 			else if (stageNum == 2)
 			{
 				if (levelNum == 1) _stage->Stage2_Level1();
-				else if (levelNum == 2) _stage->Stage2_Boss();
+				else if (levelNum == 2)
+				{
+					_stage->Stage2_Boss();
+
+					if (GameManager::StageClear[3] == true)
+					{
+						_screenDot->StageAllClear();
+						cursorXY(70, 45);
+						TextColor(7, 0);
+						cout << "메인 메뉴로 돌아가시려면 ESC를 눌러주세요";
+
+						while (true)
+						{
+
+							if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
+							{
+								Sleep(150);
+								break;
+							}
+							Sleep(50);
+						}
+						break;
+					}
+				}
 			}
 			continue;
 		}
