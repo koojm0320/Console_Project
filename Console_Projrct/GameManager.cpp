@@ -3,15 +3,15 @@
 
 GameManager::GameManager()
 {
-	playerLife = 2;
+	playerLife = 0;
 	playerInvincibleTimer = 0;
 	bossInvincibleTimer = 0;
 	WDLife = 1;
 
 	killCount = 0;
 
-	daroachLife = 19;
-	metaKnightLife = 19;
+	daroachLife = 0;
+	metaKnightLife = 0;
 
 	isCollide = false;
 	playerInvincible = false;
@@ -46,7 +46,7 @@ void GameManager::GameStart()
 
 	const int lifeCount = 3;
 	playerInvincible = false;
-
+	playerLife = 2;
 
 	while (true)
 	{
@@ -61,6 +61,7 @@ void GameManager::GameStart()
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
 			Sleep(100);
+			playerLife = 2;
 			break;
 		}
 		
@@ -132,6 +133,7 @@ void GameManager::GameStart()
 			{
 				_player->Die();
 				_player->GameOverHit();
+				//playerLife = 2;
 				system("cls");
 				cursorXY(80, 20);
 				printf("GAME OVER!");
@@ -152,6 +154,7 @@ void GameManager::GameStart()
 		if (killCount >= ENEMY_KILL_COUNT)
 		{
 			system("cls");
+			playerLife = 2;
 			cursorXY(80, 20);
 			printf("STAGE CLEAR!");
 			Sleep(2000);
@@ -171,6 +174,8 @@ void GameManager::BossStage1()
 	int bossHitEffectTimer = 0;
 	const int lifeCount = 3;
 	playerInvincible = false;
+	playerLife = 2;
+	daroachLife = 19;
 
 	while (true)
 	{
@@ -192,7 +197,7 @@ void GameManager::BossStage1()
 		_player->LaserLogic();
 		_boss->Daroach();
 		_boss->BossLaserLogic();
-		_boss->UpdatePattern();
+		_boss->UpdatePattern1();
 		_boss->RandMove();
 
 		// ========================== boss 피격 애니메이션 ======================
@@ -372,10 +377,21 @@ void GameManager::BossStage1()
 // ==============================  2-boss	============================
 void GameManager::BossStage2()
 {
+	int bossHitEffectTimer = 0;
+	const int lifeCount = 3;
+	playerInvincible = false;
+	playerLife = 2;
+	metaKnightLife = 19;
+
 	while (true)
 	{
+		system("cls");
+
 		HitBox();
 		CollisionDec();
+
+		cursorXY(75, 1);
+		cout << "- 미지의 기사 메타나이트 - ";
 
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
@@ -384,9 +400,33 @@ void GameManager::BossStage2()
 		}
 
 		_player->MoveLogic();
+		_player->LaserLogic();
 		_boss->MetaKnight();
+		_boss->BossLaserLogic();
+		_boss->UpdatePattern2();
+		_boss->RandMove();
 
+		// ========================== boss 피격 애니메이션 ======================
+		if (_boss->isAlive())
+		{
+			if (_boss->isHit())
+			{
+				_dot->MetaKnightHit(_boss->getX(), _boss->getY());
+				bossHitEffectTimer = 10;
+				_boss->setHit(false);
+			}
+			else
+			{
+				_dot->MetaKnight(_boss->getX(), _boss->getY());
+			}
+		}
 
+		if (bossHitEffectTimer > 0)
+		{
+			bossHitEffectTimer--;
+		}
+
+		// boss 피격무적 판정
 		if (bossInvincibleTimer)
 		{
 			bossInvincibleTimer--;
@@ -396,22 +436,157 @@ void GameManager::BossStage2()
 			}
 		}
 
+		// plaer 피격무적 판정
+		if (playerInvincibleTimer)
+		{
+			playerInvincibleTimer--;
+			if (playerInvincibleTimer <= 0)
+			{
+				playerInvincible = false;
+			}
+		}
+		// ========================= playerLaser -> Boss 피격 =========================
+		for (size_t i = 0; i < _player->getLaser().size(); i++)
+		{
+			if (!_player->getLaser()[i].activate)
+			{
+				continue;
+			}
+
+			// laser 히트박스
+			laserLeft = _player->getLaser()[i].x;
+			laserRight = _player->getLaser()[i].x + 4;
+			laserHeight = _player->getLaser()[i].y;
+
+			if (_boss->isAlive() &&
+				!bossInvincible &&
+				laserLeft <= metaKnightRight &&
+				laserRight >= metaKnightLeft &&
+				laserHeight >= metaKnightTop &&
+				laserHeight <= metaKnightBottom)
+			{
+				_player->getLaser()[i].activate = false;
+
+				if (metaKnightLife > 0 && metaKnightLife < 20)
+				{
+					bossHitEffectTimer = 5;
+					_boss->MetaKnightHit();
+					metaKnightLife--;
+					bossInvincible = true;
+					bossInvincibleTimer = 10;
+				}
+				else
+				{
+					_boss->Die();
+					_boss->MetaKnightClear();
+					system("cls");
+					cursorXY(80, 20);
+					printf("STAGE CLEAR!");
+					Sleep(2000);
+					return;
+				}
+				// if 구역
+			}
+			// for문 구역
+		}
+
+		//========================== BossLaser->player 피격 ==========================
+
+		vector<BossProjectile>& projectiles = _boss->getBossProjectile();
+
+		if (!playerInvincible)
+		{
+			for (size_t i = 0; i < projectiles.size(); ++i)
+			{
+				if (!projectiles[i].activate)
+				{
+					continue;
+				}
+
+				if (projectiles[i].x >= playerLeft &&
+					projectiles[i].x <= playerRight &&
+					projectiles[i].y >= playerTop &&
+					projectiles[i].y <= playerBottom)
+				{
+					projectiles[i].activate = false;
+					isCollide = true;
+					break;
+				}
+			}
+		}
+
+		//========================== Boss->player 피격 ==========================
+		if (!playerInvincible && 
+			_boss->isAlive() &&
+			playerLeft <= metaKnightRight &&
+			playerRight >= metaKnightLeft &&
+			playerTop <= metaKnightBottom &&
+			playerBottom >= metaKnightTop)
+		{
+			isCollide = true;
+		}
+		//=======================   boss 발사체   =======================
+
+		// vector<BossProjectile>& bossProjectiles = _boss->getBossProjectile();
+		for (size_t i = 0; i < projectiles.size(); ++i)
+		{
+			if (projectiles[i].activate)
+			{
+				cursorXY(projectiles[i].x, projectiles[i].y);
+				TextColor(11, 11);
+				cout << "ㅁ";
+				TextColor(7, 0);
+			}
+		}
+
+
+		//======================== metaKnightLife 체력 표기 ==========================
 		for (int i = 0; i < metaKnightLife + 1; i++)
 		{
 			TextColor(4, 4);
-			cursorXY(135 + i * 2, 2);
-			cout << "ㅁ";
+			cursorXY(67 + i * 2, 2);
+			printf("ㅁ");
 			TextColor(7, 0);
 		}
 		for (int i = metaKnightLife + 1; i < 20; i++)
 		{
 			TextColor(8, 8);
-			cursorXY(135 + i * 2, 2);
-			cout << "ㅁ";
+			cursorXY(67 + i * 2, 2);
+			printf("ㅁ");
 			TextColor(7, 0);
 		}
 
-		Sleep(3);
+		if (isCollide && !playerInvincible)
+		{
+			if (playerLife > 0 && playerLife <= 3)
+			{
+				_player->PlayerHit();
+				playerLife--;
+				playerInvincible = true;
+				playerInvincibleTimer = 10;
+			}
+			else
+			{
+				_player->Die();
+				_player->GameOverHit();
+				system("cls");
+				cursorXY(80, 20);
+				printf("GAME OVER!");
+				Sleep(2000);
+				break;
+			}
+		}
+
+		for (int i = 0; i < playerLife + 1; i++)
+		{
+			_dot->Life(1 + i * 11, 45);
+		}
+		for (int i = playerLife + 1; i < lifeCount; i++)
+		{
+			_dot->LifeDec(1 + i * 11, 45);
+		}
+
+		Sleep(16);
 	}
 }
 // ==============================  HitBox	============================

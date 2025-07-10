@@ -42,8 +42,8 @@ void Boss::Daroach()
 void Boss::MetaKnight()
 {
 	_x = 140;
-	_y = 16;
-	_dot->MetaKnight(_x, _y);
+	//_y = 16;
+	//_dot->MetaKnight(_x, _y);
 
 	if (!_alive)
 	{
@@ -68,9 +68,10 @@ void Boss::DaroachClear()
 
 void Boss::MetaKnightHit()
 {
-	_dot->MetaKnightHit(_x, _y);
-	Sleep(100);
-	_dot->MetaKnight(_x, _y);
+	//_dot->MetaKnightHit(_x, _y);
+	//Sleep(100);
+	//_dot->MetaKnight(_x, _y);
+	_isHit = true;
 }
 void Boss::MetaKnightClear()
 {
@@ -106,10 +107,10 @@ void Boss::BossLaserLogic()
 	}
 }
 
-void Boss::UpdatePattern()
+void Boss::UpdatePattern1()
 {
 	_patternTimer++;
-	if (_patternTimer > 200)
+	if (_patternTimer > 300)
 	{
 		_patternTimer = 0;
 		_currentPattern = (_currentPattern + 1) % 2;
@@ -126,30 +127,56 @@ void Boss::UpdatePattern()
 		break;
 	}
 }
-// 일직선 발사
+
+void Boss::UpdatePattern2()
+{
+	_patternTimer++;
+	if (_patternTimer > 300)
+	{
+		_patternTimer = 0;
+		_currentPattern = (_currentPattern + 1) % 3;
+		_bossProjectile.clear();
+	}
+
+	switch (_currentPattern)
+	{
+	case 0:
+		BossPattern2();
+		break;
+	case 1:
+		BossPattern3();
+		break;
+	case 2:
+		BossPattern4();
+		break;
+	}
+}
+// 3방향 랜덤 발사
 void Boss::BossPattern1()
 {
 	static double verticalSpeed = 0.0;
-	static int direction = 1;
+	static double direction = 1.0;
 
 	if (_patternTimer % 10 == 0)
 	{
+		
 		double dx = -2.0;
+		// 각도 변환 속도
 		double dy = verticalSpeed;
 
 		_bossProjectile.push_back(BossProjectile(_x - 10, _y + 8, dx, dy));
 
-		verticalSpeed += 0.2 * direction;
+		verticalSpeed += 0.5 * direction;
 
 		if (verticalSpeed > 1.5 || verticalSpeed < -1.5)
 		{
-			direction *= -1;
+			direction *= -1.2;
 		}
 
 	}
 }
 
-// 나선형 발사
+// 3방향 동시 발사
 void Boss::BossPattern2()
 {
 	if (_patternTimer % 40 == 0)
@@ -159,6 +186,36 @@ void Boss::BossPattern2()
 		_bossProjectile.push_back(BossProjectile(_x, _y + 8, -3.0, 0.0));
 
 		_bossProjectile.push_back(BossProjectile(_x, _y + 8, -3.0, 1.0));
+	}
+}
+
+// 레이저
+void Boss::BossPattern3()
+{
+	if (_patternTimer % 1 == 0)
+	{
+		_bossProjectile.push_back(BossProjectile(_x, _y + 8, -5.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x, _y + 6, -5.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x, _y + 10, -5.0, 0.0));
+	}
+}
+
+// 검기
+void Boss::BossPattern4()
+{
+	if (_patternTimer % 20 == 0)
+	{
+		_bossProjectile.push_back(BossProjectile(_x + 2, _y + 4, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x, _y + 6, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x, _y + 8, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x, _y + 10, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x + 2, _y + 12, -3.0, 0.0));
+
+		_bossProjectile.push_back(BossProjectile(_x + 3, _y + 4, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x + 1, _y + 6, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x + 1, _y + 8, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x + 1, _y + 10, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x + 3, _y + 12, -3.0, 0.0));
 	}
 }
 

@@ -55,11 +55,14 @@ public:
 
 	vector<BossProjectile>& getBossProjectile();
 
-	void UpdatePattern();
+	void UpdatePattern1();
+	void UpdatePattern2();
 	void BossLaserLogic();
 
 	void BossPattern1();
 	void BossPattern2();
+	void BossPattern3();
+	void BossPattern4();
 
 	void RandMove();
 
