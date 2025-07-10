@@ -40,8 +40,8 @@ GameManager::~GameManager()
 	delete _screenDot;
 }
 
-//==============================일반 스테이지	============================
-void GameManager::GameStart()
+//============================== 1-1 ============================
+void GameManager::Stage1_1()
 {
 
 	const int lifeCount = 3;
@@ -65,6 +65,134 @@ void GameManager::GameStart()
 			break;
 		}
 		
+
+		// laser - enemy 충돌 판정
+		for (size_t i = 0; i < _player->getLaser().size(); ++i)
+		{
+			if (!_player->getLaser()[i].activate)
+			{
+				continue;
+			}
+			for (size_t j = 0; j < _enemy->getTrashMob().size(); ++j)
+			{
+				if (!_enemy->getTrashMob()[j].isAlive)
+				{
+					continue;
+				}
+				// laser 히트박스
+				laserLeft = _player->getLaser()[i].x;
+				laserRight = _player->getLaser()[i].x + 4;
+				laserHeight = _player->getLaser()[i].y;
+
+				enemyLeft = _enemy->getTrashMob()[j].x;
+				enemyRight = enemyLeft + _enemy->getTrashMob()[j].width - 1;
+				enemyTop = _enemy->getTrashMob()[j].y;
+				enemyBottom = enemyTop + _enemy->getTrashMob()[j].height - 1;
+
+				if (laserLeft <= enemyRight && laserRight >= enemyLeft &&
+					laserHeight <= enemyBottom && laserHeight >= enemyTop)
+				{
+					_player->getLaser()[i].activate = false;
+					_enemy->getTrashMob()[j].isAlive = false;
+
+					if (WDLife > 0 && WDLife < 2)
+					{
+						_dot->WaddleDeeHit(_enemy->getTrashMob()[j].x, _enemy->getTrashMob()[j].y);
+						WDLife--;
+					}
+					else
+					{
+						_dot->WaddleDeeHit(_enemy->getTrashMob()[j].x, _enemy->getTrashMob()[j].y);
+						killCount++;
+					}
+
+					break;
+				}
+			}
+		}
+		// 무적 시간(프레임)
+		if (playerInvincibleTimer)
+		{
+			playerInvincibleTimer--;
+			if (playerInvincibleTimer <= 0)
+			{
+				playerInvincible = false;
+			}
+		}
+
+		if (isCollide && !playerInvincible)
+		{
+			if (playerLife > 0 && playerLife <= 3)
+			{
+				_player->PlayerHit();
+				playerLife--;
+				playerInvincible = true;
+				playerInvincibleTimer = 100;
+			}
+			else
+			{
+				_player->Die();
+				_player->GameOverHit();
+				//playerLife = 2;
+				system("cls");
+				cursorXY(80, 20);
+				printf("GAME OVER!");
+				Sleep(2000);
+				break;
+			}
+		}
+
+		for (int i = 0; i < playerLife + 1; i++)
+		{
+			_dot->Life(1 + i * 11, 45);
+		}
+		for (int i = playerLife + 1; i < lifeCount; i++)
+		{
+			_dot->LifeDec(1 + i * 11, 45);
+		}
+
+		if (killCount >= ENEMY_KILL_COUNT)
+		{
+			system("cls");
+			playerLife = 2;
+			cursorXY(80, 20);
+			printf("STAGE CLEAR!");
+			Sleep(2000);
+			break;
+		}
+
+		cursorXY(85, 1);
+		printf("남은 적: %d", ENEMY_KILL_COUNT - killCount);
+
+		Sleep(10);
+	}
+}
+
+//============================== 2-1 ============================
+void GameManager::Stage2_1()
+{
+
+	const int lifeCount = 3;
+	playerInvincible = false;
+	playerLife = 2;
+
+	while (true)
+	{
+		system("cls");
+		HitBox();
+		CollisionDec();
+
+		_player->MoveLogic();
+		_player->LaserLogic();
+		_enemy->EnemySpawnLogic();
+
+		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
+		{
+			Sleep(100);
+			playerLife = 2;
+			break;
+		}
+
 
 		// laser - enemy 충돌 판정
 		for (size_t i = 0; i < _player->getLaser().size(); ++i)
@@ -386,9 +514,17 @@ void GameManager::BossStage2()
 	while (true)
 	{
 		system("cls");
+		_player->MoveLogic();
+		_player->LaserLogic();
+		_boss->MetaKnight();
+		_boss->BossLaserLogic();
+		_boss->UpdatePattern2();
+		_boss->RandMove();
 
 		HitBox();
-		CollisionDec();
+		isCollide = false;
+		// CollisionDec();
+
 
 		cursorXY(75, 1);
 		cout << "- 미지의 기사 메타나이트 - ";
@@ -399,12 +535,6 @@ void GameManager::BossStage2()
 			break;
 		}
 
-		_player->MoveLogic();
-		_player->LaserLogic();
-		_boss->MetaKnight();
-		_boss->BossLaserLogic();
-		_boss->UpdatePattern2();
-		_boss->RandMove();
 
 		// ========================== boss 피격 애니메이션 ======================
 		if (_boss->isAlive())
@@ -516,12 +646,12 @@ void GameManager::BossStage2()
 		}
 
 		//========================== Boss->player 피격 ==========================
-		if (!playerInvincible && 
+		if (!playerInvincible &&
 			_boss->isAlive() &&
-			playerLeft <= metaKnightRight &&
-			playerRight >= metaKnightLeft &&
-			playerTop <= metaKnightBottom &&
-			playerBottom >= metaKnightTop)
+			playerRight >= metaKnightLeft && 
+			playerLeft <= metaKnightRight && 
+			playerBottom >= metaKnightTop && 
+			playerTop <= metaKnightBottom)   
 		{
 			isCollide = true;
 		}
@@ -647,5 +777,5 @@ void GameManager::CollisionDec()
 	}
 }
 
-// ====================== player - BossLaser충돌		=====================
 
+// ============================  Item  ===================================

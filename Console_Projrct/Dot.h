@@ -24,6 +24,11 @@ private:
 	vector<string> _metaKnight;
 	vector<string> _metaKnightHit;
 
+	// 아이템
+	vector<string> _hpUp;
+	vector<string> _atkSpeedUp;
+	vector<string> _atkPowerUp;
+
 
 	// 아이콘
 	vector<string> _kirbyStageSelect;
@@ -43,6 +48,11 @@ public:
 
 	void MetaKnight(short posX, short posY);
 	void MetaKnightHit(short posX, short posY);
+
+	void HPUp(short posX, short posY);
+	void AtkSpeedUp(short posX, short posY);
+	void AtkPowerUp(short posX, short posY);
+
 
 	void KirbyStageSelect(short posX, short posY);
 

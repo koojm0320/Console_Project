@@ -18,6 +18,10 @@ private:
 	int _x;
 	int _y;
 
+	bool _isDash;
+	int _dashSpeed;
+	int _originX;
+
 	bool _alive;
 	bool _isHit;
 
@@ -63,6 +67,8 @@ public:
 	void BossPattern2();
 	void BossPattern3();
 	void BossPattern4();
+
+	void BossDash();
 
 	void RandMove();
 

@@ -10,9 +10,7 @@ int main()
 	c.bVisible = 0; 
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &c); 
 
-	//MainGame mg;
-	GameManager mg;
-	mg.BossStage2();
+	MainGame mg;
 	return 0;
 }
 

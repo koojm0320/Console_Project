@@ -337,6 +337,7 @@ void Dot::MetaKnightHit(short posX, short posY)
     }
 }
 
+
 void Dot::Life(short posX, short posY)
 {
     _life = {
@@ -397,4 +398,16 @@ void Dot::LifeDec(short posX, short posY)
         }
         TextColor(7, 0);
     }
+}
+
+void Dot::HPUp(short posX, short posY)
+{
+}
+
+void Dot::AtkSpeedUp(short posX, short posY)
+{
+}
+
+void Dot::AtkPowerUp(short posX, short posY)
+{
 }

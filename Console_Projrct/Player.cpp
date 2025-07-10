@@ -6,17 +6,14 @@ Player::Player()
 	_shooterReset = true;
 	_alive = true;
 	_dot = new Dot;
-	// _effect = new Effect;
 	_x = 1;
 	_y = 1;
-	//shooterX = _x + 12;
-	//shooterY = _y + 2;
+
 }
 
 Player::~Player()
 {
 	delete _dot;
-	// delete _effect;
 }
 
 
@@ -39,38 +36,10 @@ void Player::MoveLogic()
 	if (_y < 1) _y = 1;
 	if (_y > 44) _y = 44;
 
-	//system("cls");
 	_dot->kirby(_x, _y);
 	
-	//shooterX += 4;
-	//
-	//
-	//// 투사체 위치 초기화 로직(수정해야 함)
-	//
-	//ResetShooter();
-	//
-	//cursorXY(shooterX, shooterY);
-	//TextColor(6, 6);
-	//cout << "ㅁㅁ";
-	//TextColor(7, 0);
-
 }
 
-// 투사체
-//void Player::ResetShooter()
-//{
-//	if (shooterX > 180) {
-//		shooterX = _x + 12;
-//		shooterY = _y + 2;
-//	}
-//
-//}
-//
-//void Player::CollisionResetShooter()
-//{
-//	shooterX = _x + 12;
-//	shooterY = _y + 2;
-//}
 
 void Player::LaserLogic()
 {

@@ -7,9 +7,12 @@ Boss::Boss()
 {
 	_alive = true;
 	_dot = new Dot;
-	_x = 0;
-	_y = 0;
+	_originX = 140;
+	_x = _originX;
+	_y = 16;
 	_isHit = false;
+	_isDash = false;
+	_dashSpeed = -10;
 
 	shooterX = 0;
 	shooterY = 0;
@@ -18,6 +21,8 @@ Boss::Boss()
 	_currentPattern = 0;
 
 	_bossMoveTimer = 0;
+
+	_bossProjectile.reserve(300);
 }
 
 Boss::~Boss()
@@ -41,7 +46,7 @@ void Boss::Daroach()
 
 void Boss::MetaKnight()
 {
-	_x = 140;
+	//_x = 140;
 	//_y = 16;
 	//_dot->MetaKnight(_x, _y);
 
@@ -84,6 +89,7 @@ void Boss::Die()
 	_alive = false;
 }
 
+// 보스 레이져 로직
 void Boss::BossLaserLogic()
 {
 	for (size_t i = 0; i < _bossProjectile.size(); ++i)
@@ -131,7 +137,7 @@ void Boss::UpdatePattern1()
 void Boss::UpdatePattern2()
 {
 	_patternTimer++;
-	if (_patternTimer > 300)
+	if (_patternTimer > 200)
 	{
 		_patternTimer = 0;
 		_currentPattern = (_currentPattern + 1) % 3;
@@ -141,13 +147,13 @@ void Boss::UpdatePattern2()
 	switch (_currentPattern)
 	{
 	case 0:
-		BossPattern2();
+		BossPattern4();
 		break;
 	case 1:
 		BossPattern3();
 		break;
 	case 2:
-		BossPattern4();
+		BossDash();
 		break;
 	}
 }
@@ -189,33 +195,73 @@ void Boss::BossPattern2()
 	}
 }
 
-// 레이저
+// 3방향 동시 발사 + 순간이동
 void Boss::BossPattern3()
 {
-	if (_patternTimer % 1 == 0)
+	if (_patternTimer % 20 == 0)
 	{
-		_bossProjectile.push_back(BossProjectile(_x, _y + 8, -5.0, 0.0));
-		_bossProjectile.push_back(BossProjectile(_x, _y + 6, -5.0, 0.0));
-		_bossProjectile.push_back(BossProjectile(_x, _y + 10, -5.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x, _y + 8, -3.0, -1.0));
+
+		_bossProjectile.push_back(BossProjectile(_x, _y + 8, -3.0, 0.0));
+
+		_bossProjectile.push_back(BossProjectile(_x, _y + 8, -3.0, 1.0));
+
+		_y = (rand() % 26) + 5;
 	}
 }
 
 // 검기
 void Boss::BossPattern4()
 {
-	if (_patternTimer % 20 == 0)
+	if (_patternTimer % 40 == 0)
 	{
 		_bossProjectile.push_back(BossProjectile(_x + 2, _y + 4, -3.0, 0.0));
 		_bossProjectile.push_back(BossProjectile(_x, _y + 6, -3.0, 0.0));
 		_bossProjectile.push_back(BossProjectile(_x, _y + 8, -3.0, 0.0));
 		_bossProjectile.push_back(BossProjectile(_x, _y + 10, -3.0, 0.0));
 		_bossProjectile.push_back(BossProjectile(_x + 2, _y + 12, -3.0, 0.0));
-
+		
 		_bossProjectile.push_back(BossProjectile(_x + 3, _y + 4, -3.0, 0.0));
 		_bossProjectile.push_back(BossProjectile(_x + 1, _y + 6, -3.0, 0.0));
 		_bossProjectile.push_back(BossProjectile(_x + 1, _y + 8, -3.0, 0.0));
 		_bossProjectile.push_back(BossProjectile(_x + 1, _y + 10, -3.0, 0.0));
 		_bossProjectile.push_back(BossProjectile(_x + 3, _y + 12, -3.0, 0.0));
+		
+		_bossProjectile.push_back(BossProjectile(_x + 4, _y + 4, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x + 2, _y + 6, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x + 2, _y + 8, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x + 2, _y + 10, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x + 4, _y + 12, -3.0, 0.0));
+		
+		_bossProjectile.push_back(BossProjectile(_x + 5, _y + 4, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x + 3, _y + 6, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x + 3, _y + 8, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x + 3, _y + 10, -3.0, 0.0));
+		_bossProjectile.push_back(BossProjectile(_x + 5, _y + 12, -3.0, 0.0));
+
+	}
+}
+
+// 대쉬
+void Boss::BossDash()
+{
+	if (!_isDash)
+	{
+		_originX = _x;
+		_isDash = true;
+	}
+
+	if (_isDash)
+	{
+		_x += _dashSpeed;
+
+		if (_x + 10 < 1)
+		{
+			_x = 140;
+			_isDash = false;
+
+			_patternTimer = 201;
+		}
 	}
 }
 

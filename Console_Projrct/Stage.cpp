@@ -18,7 +18,7 @@ void Stage::Stage1_Level1()
 	cursorXY(89, 24);
 	cout << "1-1";
 	Sleep(2000);
-	_gameManager->GameStart();
+	_gameManager->Stage1_1();
 }
 
 void Stage::Stage1_Boss()
@@ -36,7 +36,7 @@ void Stage::Stage2_Level1()
 	cursorXY(89, 24);
 	cout << "2-1";
 	Sleep(2000);
-	_gameManager->GameStart();
+	_gameManager->Stage2_1();
 }
 
 void Stage::Stage2_Boss()

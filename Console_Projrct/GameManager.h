@@ -59,7 +59,8 @@ class GameManager
 	int laserHeight;
 
 public:
-	void GameStart();
+	void Stage1_1();
+	void Stage2_1();
 	void BossStage1();
 	void BossStage2();
 	void HitBox();
