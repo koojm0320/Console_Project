@@ -33,18 +33,21 @@ Menu::Menu()
 
 		if (GetAsyncKeyState(VK_UP) & 0x8000)
 		{
+			mciSendString(TEXT("play Kirby_Keybord.wav from 0"), NULL, 0, NULL);
 			select--;
 			if (select < 0) select = menuCount - 1;
 			Sleep(150);
 		}
 		else if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 		{
+			mciSendString(TEXT("play Kirby_Keybord.wav from 0"), NULL, 0, NULL);
 			select++;
 			if (select >= menuCount) select = 0;
 			Sleep(150);
 		}
 		else if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 		{
+			mciSendString(TEXT("play Kirby_Enter.wav from 0"), NULL, 0, NULL);
 			if (select == 0)
 			{
 				_stageSelect = new StageSelect;
@@ -105,16 +108,18 @@ void Menu::explane()
 	cout << "기본 스테이지: 정해진 몹 수를 처지하면 클리어 !";
 	cursorXY(72, 31);
 	cout << "보스 스테이지: 보스의 체력이 0이 되면 클리어 !";
+	
+	TextColor(15, 0);
 	cursorXY(75, 48);
-	cout << " 메인 메뉴로 돌아가려면 ESC를 누르세요 ";
-	TextColor(7, 0);
-
-
+	cout << "  메인 메뉴로 돌아가려면 ESC를 누르세요 ";
+	
+	
 	while (true)
 	{
 	
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
+			mciSendString(TEXT("play Kirby_ESC.wav from 0"), NULL, 0, NULL);
 			TextColor(7, 0);
 			system("cls");
 			break;

@@ -55,10 +55,22 @@
     <Text Include="메모.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="Kirby_AllClear.wav" />
     <Media Include="Kirby_Boss.wav" />
+    <Media Include="Kirby_BossDamage.wav" />
+    <Media Include="Kirby_BossDie.wav" />
+    <Media Include="Kirby_BossLaser.wav" />
+    <Media Include="Kirby_Enter.wav" />
+    <Media Include="Kirby_ESC.wav" />
+    <Media Include="Kirby_GameOver.wav" />
+    <Media Include="Kirby_Hit.wav" />
+    <Media Include="Kirby_Keybord.wav" />
     <Media Include="Kirby_Laser.wav" />
     <Media Include="Kirby_Main.wav" />
+    <Media Include="Kirby_NoEntry.wav" />
     <Media Include="Kirby_Stage.wav" />
+    <Media Include="Kirby_StageClear.wav" />
+    <Media Include="Kirby_TrashMobDie.wav" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

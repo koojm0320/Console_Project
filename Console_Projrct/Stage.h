@@ -9,6 +9,7 @@ class Stage
 {
 private:
     GameManager* _gameManager;
+    ScreenDot* _screenDot;
 
 public:
     void Stage1_Level1();

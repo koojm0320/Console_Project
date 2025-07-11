@@ -42,7 +42,9 @@ GameManager::~GameManager()
 	delete _screenDot;
 }
 
-//============================== 1-1 ============================
+// ===================================================================================================
+// ==============================================    1-1    ==========================================
+// ===================================================================================================
 void GameManager::Stage1_1()
 {
 	killCount = 0;
@@ -62,8 +64,14 @@ void GameManager::Stage1_1()
 		_player->LaserLogic();
 		_enemy->EnemySpawnLogic();
 
+		cursorXY(85, 1);
+		TextColor(0, 15);
+		printf("남은 적: %d ", ENEMY_KILL_COUNT - killCount);
+		TextColor(15, 0);
+
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
+			mciSendString(TEXT("play Kirby_ESC.wav from 0"), NULL, 0, NULL);
 			Sleep(100);
 			playerLife = 2;
 			PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
@@ -100,16 +108,9 @@ void GameManager::Stage1_1()
 					_player->getLaser()[i].activate = false;
 					_enemy->getTrashMob()[j].isAlive = false;
 
-					if (WDLife > 0 && WDLife < 2)
-					{
-						_dot->WaddleDeeHit(_enemy->getTrashMob()[j].x, _enemy->getTrashMob()[j].y);
-						WDLife--;
-					}
-					else
-					{
-						_dot->WaddleDeeHit(_enemy->getTrashMob()[j].x, _enemy->getTrashMob()[j].y);
-						killCount++;
-					}
+					mciSendString(TEXT("play Kirby_TrashMobDie.wav from 0"), NULL, 0, NULL);
+					_dot->WaddleDeeHit(_enemy->getTrashMob()[j].x, _enemy->getTrashMob()[j].y);
+					killCount++;
 
 					break;
 				}
@@ -127,22 +128,24 @@ void GameManager::Stage1_1()
 
 		if (isCollide && !playerInvincible)
 		{
+			mciSendString(TEXT("play Kirby_Hit.wav from 0"), NULL, 0, NULL);
 			if (playerLife > 0 && playerLife <= 3)
 			{
 				_player->PlayerHit();
 				playerLife--;
 				playerInvincible = true;
-				playerInvincibleTimer = 100;
+				playerInvincibleTimer = 50;
 			}
 			else
 			{
+				PlaySound(NULL, 0, 0);
 				_player->Die();
 				_player->GameOverHit();
-				//playerLife = 2;
 				system("cls");
-				cursorXY(80, 20);
-				printf("GAME OVER!");
-				Sleep(2000);
+				_screenDot->GameOver();
+				mciSendString(TEXT("play Kirby_GameOver.wav from 0"), NULL, 0, NULL);
+				Sleep(4000);
+				PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 				break;
 			}
 		}
@@ -158,30 +161,33 @@ void GameManager::Stage1_1()
 
 		if (killCount >= ENEMY_KILL_COUNT)
 		{
+			PlaySound(NULL, 0, 0);
 			Sleep(2000);
 			system("cls");
 			playerLife = 2;
 			StageClear[0] = true;
-			cursorXY(80, 20);
-			printf("STAGE CLEAR!");
+			PlaySound(TEXT("Kirby_StageClear.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			_screenDot->StageClear();
 			Sleep(2000);
+			PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 			break;
 		}
-
-		cursorXY(85, 1);
-		printf("남은 적: %d", ENEMY_KILL_COUNT - killCount);
 
 		Sleep(10);
 	}
 }
 
-//============================== 2-1 ============================
+// ===================================================================================================
+// ==============================================    2-1    ==========================================
+// ===================================================================================================
 void GameManager::Stage2_1()
 {
 	killCount = 0;
 	const int lifeCount = 3;
 	playerInvincible = false;
 	playerLife = 2;
+
+	PlaySound(TEXT("Kirby_Stage.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 
 	while (true)
 	{
@@ -231,17 +237,10 @@ void GameManager::Stage2_1()
 					_player->getLaser()[i].activate = false;
 					_enemy->getTrashMob()[j].isAlive = false;
 
-					if (WDLife > 0 && WDLife < 2)
-					{
-						_dot->WaddleDeeHit(_enemy->getTrashMob()[j].x, _enemy->getTrashMob()[j].y);
-						WDLife--;
-					}
-					else
-					{
-						_dot->WaddleDeeHit(_enemy->getTrashMob()[j].x, _enemy->getTrashMob()[j].y);
-						killCount++;
-					}
-
+					mciSendString(TEXT("play Kirby_TrashMobDie.wav from 0"), NULL, 0, NULL);
+					_dot->WaddleDeeHit(_enemy->getTrashMob()[j].x, _enemy->getTrashMob()[j].y);
+					killCount++;
+					
 					break;
 				}
 			}
@@ -258,22 +257,24 @@ void GameManager::Stage2_1()
 
 		if (isCollide && !playerInvincible)
 		{
+			mciSendString(TEXT("play Kirby_Hit.wav from 0"), NULL, 0, NULL);
 			if (playerLife > 0 && playerLife <= 3)
 			{
 				_player->PlayerHit();
 				playerLife--;
 				playerInvincible = true;
-				playerInvincibleTimer = 100;
+				playerInvincibleTimer = 50;
 			}
 			else
 			{
+				PlaySound(NULL, 0, 0);
 				_player->Die();
 				_player->GameOverHit();
-				//playerLife = 2;
 				system("cls");
-				cursorXY(80, 20);
-				printf("GAME OVER!");
-				Sleep(2000);
+				_screenDot->GameOver();
+				mciSendString(TEXT("play Kirby_GameOver.wav from 0"), NULL, 0, NULL);
+				Sleep(4000);
+				PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 				break;
 			}
 		}
@@ -289,12 +290,15 @@ void GameManager::Stage2_1()
 
 		if (killCount >= ENEMY_KILL_COUNT)
 		{
+			PlaySound(NULL, 0, 0);
+			Sleep(2000);
 			system("cls");
 			playerLife = 2;
 			StageClear[2] = true;
-			cursorXY(80, 20);
-			printf("STAGE CLEAR!");
+			PlaySound(TEXT("Kirby_StageClear.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			_screenDot->StageClear();
 			Sleep(2000);
+			PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 			break;
 		}
 
@@ -305,7 +309,9 @@ void GameManager::Stage2_1()
 	}
 }
 
-// ==============================  1-boss	============================
+// ===================================================================================================
+// ==============================================   1-boss  ==========================================
+// ===================================================================================================
 void GameManager::BossStage1()
 {
 	int bossHitEffectTimer = 0;
@@ -313,6 +319,8 @@ void GameManager::BossStage1()
 	playerInvincible = false;
 	playerLife = 2;
 	daroachLife = 19;
+
+	PlaySound(TEXT("Kirby_Boss.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 
 	while (true)
 	{
@@ -399,6 +407,7 @@ void GameManager::BossStage1()
 				laserHeight <= daroachBottom)
 			{
 				_player->getLaser()[i].activate = false;
+				mciSendString(TEXT("play Kirby_BossDamage.wav from 0"), NULL, 0, NULL);
 
 				if (daroachLife > 0 && daroachLife < 20)
 				{
@@ -410,13 +419,15 @@ void GameManager::BossStage1()
 				}
 				else
 				{
+					PlaySound(NULL, 0, 0);
 					_boss->Die();
 					_boss->DaroachClear();
 					system("cls");
 					StageClear[1] = true;
-					cursorXY(80, 20);
-					printf("STAGE CLEAR!");
-					Sleep(2000);
+					_screenDot->StageClear();
+					mciSendString(TEXT("play Kirby_StageClear.wav from 0"), NULL, 0, NULL);
+					Sleep(3000);
+					PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 					return;
 				}
 				// if 구역
@@ -451,7 +462,6 @@ void GameManager::BossStage1()
 
 		//=======================   boss 발사체   =======================
 
-		// vector<BossProjectile>& bossProjectiles = _boss->getBossProjectile();
 		for (size_t i = 0; i < projectiles.size(); ++i)
 		{
 			if (projectiles[i].activate)
@@ -482,6 +492,7 @@ void GameManager::BossStage1()
 
 		if (isCollide && !playerInvincible)
 		{
+			mciSendString(TEXT("play Kirby_Hit.wav from 0"), NULL, 0, NULL);
 			if (playerLife > 0 && playerLife <= 3)
 			{
 				_player->PlayerHit();
@@ -491,12 +502,15 @@ void GameManager::BossStage1()
 			}
 			else
 			{
+				PlaySound(NULL, 0, 0);
 				_player->Die();
 				_player->GameOverHit();
+				Sleep(1000);
 				system("cls");
-				cursorXY(80, 20);
-				printf("GAME OVER!");
-				Sleep(2000);
+				_screenDot->GameOver();
+				mciSendString(TEXT("play Kirby_GameOver.wav from 0"), NULL, 0, NULL);
+				Sleep(4000);
+				PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 				break;
 			}
 		}
@@ -514,7 +528,9 @@ void GameManager::BossStage1()
 	}
 }
 
-// ==============================  2-boss	============================
+// ===================================================================================================
+// ==============================================   2-boss  ==========================================
+// ===================================================================================================
 void GameManager::BossStage2()
 {
 	int bossHitEffectTimer = 0;
@@ -522,6 +538,8 @@ void GameManager::BossStage2()
 	playerInvincible = false;
 	playerLife = 2;
 	metaKnightLife = 19;
+
+	PlaySound(TEXT("Kirby_Boss.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 
 	while (true)
 	{
@@ -610,6 +628,7 @@ void GameManager::BossStage2()
 				laserHeight <= metaKnightBottom)
 			{
 				_player->getLaser()[i].activate = false;
+				mciSendString(TEXT("play Kirby_BossDamage.wav from 0"), NULL, 0, NULL);
 
 				if (metaKnightLife > 0 && metaKnightLife < 20)
 				{
@@ -621,13 +640,14 @@ void GameManager::BossStage2()
 				}
 				else
 				{
+					PlaySound(NULL, 0, 0);
 					_boss->Die();
 					_boss->MetaKnightClear();
 					system("cls");
 					StageClear[3] = true;
-					cursorXY(80, 20);
-					printf("STAGE CLEAR!");
-					Sleep(2000);
+					_screenDot->StageClear();
+					mciSendString(TEXT("play Kirby_StageClear.wav from 0"), NULL, 0, NULL);
+					Sleep(3000);
 					return;
 				}
 				// if 구역
@@ -703,6 +723,7 @@ void GameManager::BossStage2()
 
 		if (isCollide && !playerInvincible)
 		{
+			mciSendString(TEXT("play Kirby_Hit.wav from 0"), NULL, 0, NULL);
 			if (playerLife > 0 && playerLife <= 3)
 			{
 				_player->PlayerHit();
@@ -712,12 +733,15 @@ void GameManager::BossStage2()
 			}
 			else
 			{
+				PlaySound(NULL, 0, 0);
 				_player->Die();
 				_player->GameOverHit();
+				Sleep(1000);
 				system("cls");
-				cursorXY(80, 20);
-				printf("GAME OVER!");
-				Sleep(2000);
+				_screenDot->GameOver();
+				mciSendString(TEXT("play Kirby_GameOver.wav from 0"), NULL, 0, NULL);
+				Sleep(4000);
+				PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 				break;
 			}
 		}

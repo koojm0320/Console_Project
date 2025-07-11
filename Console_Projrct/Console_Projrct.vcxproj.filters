@@ -113,5 +113,41 @@
     <Media Include="Kirby_Laser.wav">
       <Filter>Project\사운드</Filter>
     </Media>
+    <Media Include="Kirby_TrashMobDie.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_StageClear.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_BossDamage.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_BossDie.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_Hit.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_BossLaser.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_NoEntry.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_ESC.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_Enter.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_Keybord.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_GameOver.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_AllClear.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
   </ItemGroup>
 </Project>

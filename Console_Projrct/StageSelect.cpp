@@ -26,7 +26,14 @@ void StageSelect::StageRun()
 	{
 		system("cls");
 		cursorXY(70, 15);
+		TextColor(0, 15);
 		cout << "스테이지를 선택해 주세요. (SPACE로 선택)" << endl;
+		TextColor(7, 0);
+
+		cursorXY(84, 48);
+		TextColor(0, 15);
+		cout << "뒤로가기 (ESC)";
+		TextColor(7, 0);
 
 		for (int i = 0; i < stageCount; i++)
 		{
@@ -45,23 +52,27 @@ void StageSelect::StageRun()
 		// 키 입력
 		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 		{
+			mciSendString(TEXT("play Kirby_Keybord.wav from 0"), NULL, 0, NULL);
 			selectStage--;
 			Sleep(100);
 		}
 		else if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 		{
+			mciSendString(TEXT("play Kirby_Keybord.wav from 0"), NULL, 0, NULL);
 			selectStage++;
 			Sleep(100);
 		}
 		else if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 		{
+			mciSendString(TEXT("play Kirby_Enter.wav from 0"), NULL, 0, NULL);
 			if (selectStage > 0 && !GameManager::StageClear[selectStage - 1])
 			{
+				mciSendString(TEXT("play Kirby_NoEntry.wav from 0"), NULL, 0, NULL);
 				cursorXY(68, 7);
 				TextColor(4, 7);
 				cout << "이전 스테이지를 클리어해야 입장 가능합니다!";
 				TextColor(7, 0);
-				Sleep(2000);
+				Sleep(1000);
 				continue;
 			}
 
@@ -85,6 +96,7 @@ void StageSelect::StageRun()
 					if (GameManager::StageClear[3] == true)
 					{
 						_screenDot->StageAllClear();
+						mciSendString(TEXT("play Kirby_AllClear.wav from 0"), NULL, 0, NULL);
 						cursorXY(70, 45);
 						TextColor(7, 0);
 						cout << "메인 메뉴로 돌아가시려면 ESC를 눌러주세요";
@@ -93,7 +105,9 @@ void StageSelect::StageRun()
 						{
 							if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 							{
+								mciSendString(TEXT("play Kirby_ESC.wav from 0"), NULL, 0, NULL);
 								Sleep(150);
+								PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 								break;
 							}
 							Sleep(50);
@@ -106,6 +120,7 @@ void StageSelect::StageRun()
 		}
 		else if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
+			mciSendString(TEXT("play Kirby_ESC.wav from 0"), NULL, 0, NULL);
 			system("cls");
 			Sleep(100);
 			break;
