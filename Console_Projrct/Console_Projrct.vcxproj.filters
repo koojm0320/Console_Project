@@ -18,16 +18,7 @@
     <ClInclude Include="Dot.h">
       <Filter>Project\헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="MainGame.h">
-      <Filter>Project\헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Project\헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Stage.h">
-      <Filter>Project\헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Unit.h">
       <Filter>Project\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -51,22 +42,16 @@
     <ClInclude Include="ScreenDot.h">
       <Filter>Project\헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Item.h">
+      <Filter>Project\헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dot.cpp">
       <Filter>Project\소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="MainGame.cpp">
-      <Filter>Project\소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Project\소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Stage.cpp">
-      <Filter>Project\소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Unit.cpp">
       <Filter>Project\소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
@@ -87,13 +72,14 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Project\소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Project</Filter>
-    </ClCompile>
     <ClCompile Include="ScreenDot.cpp">
       <Filter>Project\소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Item.cpp">
+      <Filter>Project\소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="메모.txt">

@@ -25,13 +25,11 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="MainGame.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ScreenDot.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageSelect.h" />
-    <ClInclude Include="Unit.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Boss.cpp" />
@@ -43,13 +41,11 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ScreenDot.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageSelect.cpp" />
-    <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="메모.txt" />

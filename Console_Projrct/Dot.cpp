@@ -34,7 +34,7 @@ void Dot::kirby(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -42,7 +42,7 @@ void Dot::kirby(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -69,7 +69,7 @@ void Dot::kirbyHit(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -77,7 +77,7 @@ void Dot::kirbyHit(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -100,7 +100,7 @@ void Dot::KirbyStageSelect(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -108,7 +108,7 @@ void Dot::KirbyStageSelect(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -133,7 +133,7 @@ void Dot::WaddleDee(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -141,7 +141,7 @@ void Dot::WaddleDee(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 void Dot::WaddleDeeHit(short posX, short posY)
@@ -164,7 +164,7 @@ void Dot::WaddleDeeHit(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -172,7 +172,7 @@ void Dot::WaddleDeeHit(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -205,7 +205,7 @@ void Dot::Daroach(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -213,7 +213,7 @@ void Dot::Daroach(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 void Dot::DaroachHit(short posX, short posY)
@@ -244,7 +244,7 @@ void Dot::DaroachHit(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -252,7 +252,7 @@ void Dot::DaroachHit(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -286,7 +286,7 @@ void Dot::MetaKnight(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -294,7 +294,7 @@ void Dot::MetaKnight(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 void Dot::MetaKnightHit(short posX, short posY)
@@ -325,7 +325,7 @@ void Dot::MetaKnightHit(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -333,7 +333,7 @@ void Dot::MetaKnightHit(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -357,7 +357,7 @@ void Dot::Life(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -365,7 +365,7 @@ void Dot::Life(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -388,7 +388,7 @@ void Dot::LifeDec(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -396,7 +396,7 @@ void Dot::LifeDec(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -417,7 +417,7 @@ void Dot::HPUp(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -425,7 +425,7 @@ void Dot::HPUp(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -446,7 +446,7 @@ void Dot::AtkPowerUp(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -454,7 +454,7 @@ void Dot::AtkPowerUp(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -475,7 +475,7 @@ void Dot::AtkSpeedUp(short posX, short posY)
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -483,6 +483,6 @@ void Dot::AtkSpeedUp(short posX, short posY)
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }

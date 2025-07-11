@@ -28,12 +28,12 @@ void StageSelect::StageRun()
 		cursorXY(70, 15);
 		TextColor(0, 15);
 		cout << "스테이지를 선택해 주세요. (SPACE로 선택)" << endl;
-		TextColor(7, 0);
+		TextColor(15, 0);
 
 		cursorXY(84, 48);
 		TextColor(0, 15);
 		cout << "뒤로가기 (ESC)";
-		TextColor(7, 0);
+		TextColor(15, 0);
 
 		for (int i = 0; i < stageCount; i++)
 		{
@@ -68,10 +68,10 @@ void StageSelect::StageRun()
 			if (selectStage > 0 && !GameManager::StageClear[selectStage - 1])
 			{
 				mciSendString(TEXT("play Kirby_NoEntry.wav from 0"), NULL, 0, NULL);
-				cursorXY(68, 7);
-				TextColor(4, 7);
+				cursorXY(68, 15);
+				TextColor(4, 15);
 				cout << "이전 스테이지를 클리어해야 입장 가능합니다!";
-				TextColor(7, 0);
+				TextColor(15, 0);
 				Sleep(1000);
 				continue;
 			}
@@ -98,7 +98,7 @@ void StageSelect::StageRun()
 						_screenDot->StageAllClear();
 						mciSendString(TEXT("play Kirby_AllClear.wav from 0"), NULL, 0, NULL);
 						cursorXY(70, 45);
-						TextColor(7, 0);
+						TextColor(15, 0);
 						cout << "메인 메뉴로 돌아가시려면 ESC를 눌러주세요";
 
 						while (true)

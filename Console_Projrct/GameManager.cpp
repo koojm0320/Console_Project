@@ -469,7 +469,7 @@ void GameManager::BossStage1()
 				cursorXY(projectiles[i].x, projectiles[i].y);
 				TextColor(4, 4);
 				cout << "け";
-				TextColor(7, 0);
+				TextColor(15, 0);
 			}
 		}
 
@@ -480,14 +480,14 @@ void GameManager::BossStage1()
 			TextColor(4, 4);
 			cursorXY(67 + i * 2, 2);
 			printf("け");
-			TextColor(7, 0);
+			TextColor(15, 0);
 		}
 		for (int i = daroachLife + 1; i < 20; i++)
 		{
 			TextColor(8, 8);
 			cursorXY(67  + i * 2, 2);
 			printf("け");
-			TextColor(7, 0);
+			TextColor(15, 0);
 		}
 
 		if (isCollide && !playerInvincible)
@@ -700,7 +700,7 @@ void GameManager::BossStage2()
 				cursorXY(projectiles[i].x, projectiles[i].y);
 				TextColor(11, 11);
 				cout << "け";
-				TextColor(7, 0);
+				TextColor(15, 0);
 			}
 		}
 
@@ -711,14 +711,14 @@ void GameManager::BossStage2()
 			TextColor(4, 4);
 			cursorXY(67 + i * 2, 2);
 			printf("け");
-			TextColor(7, 0);
+			TextColor(15, 0);
 		}
 		for (int i = metaKnightLife + 1; i < 20; i++)
 		{
 			TextColor(8, 8);
 			cursorXY(67 + i * 2, 2);
 			printf("け");
-			TextColor(7, 0);
+			TextColor(15, 0);
 		}
 
 		if (isCollide && !playerInvincible)

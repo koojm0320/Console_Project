@@ -36,7 +36,9 @@ private:
 	int shooterY;
 
 public:
-
+	// 보스 종류
+	void Daroach();
+	void MetaKnight();
 	int getX() { return _x; }
 	int getY() { return _y; }
 
@@ -47,8 +49,6 @@ public:
 	bool isHit() const { return _isHit; }
 	void setHit(bool isHit) { _isHit = isHit; }
 
-	void Daroach();
-	void MetaKnight();
 
 	void DaroachHit();
 	void DaroachClear();

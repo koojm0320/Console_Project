@@ -14,46 +14,46 @@ class GameManager
 	Dot* _dot;
 	ScreenDot* _screenDot;
 
+	// 플레이어 생존 관련 자료형
 	int playerLife;
 	int playerInvincibleTimer;
 	int bossInvincibleTimer;
+	bool isCollide;
+	bool playerInvincible;
 
+	// 적군 생존 관련 자료형
 	int WDLife;
 	int const ENEMY_KILL_COUNT = 10;
 	int killCount;
-
 	int daroachLife;
 	int metaKnightLife;
-
-	bool isCollide;
-	bool playerInvincible;
 	bool bossInvincible;
 
-	// player
+	// 플레이어 히트박스
 	int playerLeft;
 	int playerRight;
 	int playerTop;
 	int playerBottom;
 
-	// enemy
+	// 쫄몹 히트박스
 	int enemyLeft;
 	int enemyRight;
 	int enemyTop;
 	int enemyBottom;
 
-	// boss1
+	// 1스테이지 보스 히트박스
 	int daroachLeft;
 	int daroachRight;
 	int daroachTop;
 	int daroachBottom;
 
-	// boss2
+	// 2스테이지 보스 히트박스
 	int metaKnightLeft;
 	int metaKnightRight;
 	int metaKnightTop;
 	int metaKnightBottom;
 
-	// laser
+	// 플레이어 레이저
 	int laserLeft;
 	int laserRight;
 	int laserHeight;

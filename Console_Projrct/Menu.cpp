@@ -28,7 +28,7 @@ Menu::Menu()
 			else cout << "  ";
 			
 			cout << menu[i] << "  \n";
-			TextColor(7, 0);
+			TextColor(15, 0);
 		}
 
 		if (GetAsyncKeyState(VK_UP) & 0x8000)
@@ -120,7 +120,7 @@ void Menu::explane()
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
 			mciSendString(TEXT("play Kirby_ESC.wav from 0"), NULL, 0, NULL);
-			TextColor(7, 0);
+			TextColor(15, 0);
 			system("cls");
 			break;
 		}

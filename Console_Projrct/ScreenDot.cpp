@@ -71,7 +71,7 @@ void ScreenDot::MainScreen()
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -79,7 +79,7 @@ void ScreenDot::MainScreen()
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 
 }
@@ -148,7 +148,7 @@ void ScreenDot::ExplaneScreen()
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -156,7 +156,7 @@ void ScreenDot::ExplaneScreen()
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -224,7 +224,7 @@ void ScreenDot::StageAllClear()
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -232,7 +232,7 @@ void ScreenDot::StageAllClear()
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -300,7 +300,7 @@ void ScreenDot::StageClear()
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -308,7 +308,7 @@ void ScreenDot::StageClear()
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -376,7 +376,7 @@ void ScreenDot::GameOver()
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -384,7 +384,7 @@ void ScreenDot::GameOver()
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -452,7 +452,7 @@ void ScreenDot::Stage1_1()
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -460,7 +460,7 @@ void ScreenDot::Stage1_1()
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -528,7 +528,7 @@ void ScreenDot::Stage1_Boss()
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -536,7 +536,7 @@ void ScreenDot::Stage1_Boss()
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -604,7 +604,7 @@ void ScreenDot::Stage2_1()
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -612,7 +612,7 @@ void ScreenDot::Stage2_1()
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 
@@ -680,7 +680,7 @@ void ScreenDot::Stage2_Boss()
 
             if (colorNum > 16 || colorNum < 0)
             {
-                TextColor(7, 0);
+                TextColor(15, 0);
             }
             else
             {
@@ -688,7 +688,7 @@ void ScreenDot::Stage2_Boss()
             }
             cout << "け";
         }
-        TextColor(7, 0);
+        TextColor(15, 0);
     }
 }
 

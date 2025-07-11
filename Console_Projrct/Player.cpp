@@ -72,7 +72,7 @@ void Player::LaserLogic()
 			cursorXY(_laser[i].x, _laser[i].y);
 			TextColor(6, 6);
 			cout << "¤±¤±";
-			TextColor(7, 0);
+			TextColor(15, 0);
 		}
 	}
 }

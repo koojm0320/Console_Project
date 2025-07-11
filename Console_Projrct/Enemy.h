@@ -2,6 +2,7 @@
 #include "Dot.h"
 #include <time.h>
 
+// 쫄몹의 정보를 정의하기 위한 구조체
 struct TrashMob
 {
 	int x, y;
@@ -30,14 +31,9 @@ public:
 	vector<TrashMob>& getTrashMob();
 	void EnemySpawnLogic();
 
-	// void Die();
+
 	bool isAlive() const { return _alive; }
 	
-	// void ResetEnemy();
-	// void Respawn();
-
-	// void WaddleDee();
-	// void WaddleDeeHit();
 
 	Enemy();
 	~Enemy();

@@ -4,8 +4,6 @@
 Enemy::Enemy()
 {
 	_dot = new Dot;
-	//_y = rand() % 45;
-	//_x = 170;
 	_alive = true;
 }
 
@@ -13,60 +11,6 @@ Enemy::~Enemy()
 {
 	delete _dot;
 }
-
-
-//void Enemy::WaddleDee()
-//{
-//
-//	srand(time(NULL));
-//	--_x;
-//
-//	if (!_alive)
-//	{
-//		return;
-//	}
-//	//ResetEnemy();
-//}
-//
-//void Enemy::WaddleDeeHit()
-//{
-//	_dot->WaddleDeeHit(_x, _y);
-//	Sleep(50);
-//	_dot->WaddleDee(_x, _y);
-//}
-//
-//
-//void Enemy::Die()
-//{
-//	_dot->WaddleDeeHit(_x, _y);
-//	Sleep(50);
-//	_dot->WaddleDee(_x, _y);
-//	_alive = false;
-//}
-
-//void Enemy::ResetEnemy()
-//{
-//	if (_x < 1)
-//	{
-//		// 왼쪽 벽으로 가면 오른쪽으로 좌표를 재설정
-//		// 나중에 바꿔야 함
-//		// 도트 없애기
-//		_x = 170;
-//		_y = rand() % 45;
-//	}
-//	else
-//	{
-//		_dot->WaddleDee(_x, _y);
-//	}
-//}
-//
-//// 리스폰
-//void Enemy::Respawn()
-//{
-//	_x = 170;
-//	_y = rand() % 45;
-//	_alive = true;
-//}
 
 void Enemy::EnemySpawnLogic()
 {
