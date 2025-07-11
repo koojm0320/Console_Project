@@ -84,8 +84,7 @@ Menu::Menu()
 
 Menu::~Menu()
 {
-	delete _stage;
-	delete _screenDot;
+	// !
 }
 
 

@@ -14,8 +14,8 @@ Boss::Boss()
 	_isDash = false;
 	_dashSpeed = -10;
 
-	shooterX = 0;
-	shooterY = 0;
+	verticalSpeed = 0.0;
+	direction = 1.0;
 
 	_patternTimer = 0;
 	_currentPattern = 0;
@@ -34,8 +34,6 @@ Boss::~Boss()
 void Boss::Daroach()
 {
 	_x = 150;
-	// _y = 16;
-	// _dot->Daroach(_x, _y);
 
 	if (!_alive)
 	{
@@ -46,10 +44,6 @@ void Boss::Daroach()
 
 void Boss::MetaKnight()
 {
-	//_x = 140;
-	//_y = 16;
-	//_dot->MetaKnight(_x, _y);
-
 	if (!_alive)
 	{
 		return;
@@ -58,9 +52,6 @@ void Boss::MetaKnight()
 
 void Boss::DaroachHit()
 {
-	//_dot->DaroachHit(_x, _y);
-	//Sleep(100);
-	//_dot->Daroach(_x, _y);
 	_isHit = true;
 }
 void Boss::DaroachClear()
@@ -73,9 +64,6 @@ void Boss::DaroachClear()
 
 void Boss::MetaKnightHit()
 {
-	//_dot->MetaKnightHit(_x, _y);
-	//Sleep(100);
-	//_dot->MetaKnight(_x, _y);
 	_isHit = true;
 }
 void Boss::MetaKnightClear()
@@ -160,9 +148,6 @@ void Boss::UpdatePattern2()
 // 3방향 랜덤 발사
 void Boss::BossPattern1()
 {
-	static double verticalSpeed = 0.0;
-	static double direction = 1.0;
-
 	if (_patternTimer % 10 == 0)
 	{
 		
@@ -185,7 +170,7 @@ void Boss::BossPattern1()
 // 3방향 동시 발사
 void Boss::BossPattern2()
 {
-	if (_patternTimer % 40 == 0)
+	if (_patternTimer % 30 == 0)
 	{
 		_bossProjectile.push_back(BossProjectile(_x, _y + 8, -3.0, -1.0));
 
@@ -265,6 +250,7 @@ void Boss::BossDash()
 	}
 }
 
+// 주기적으로 순간이동
 void Boss::RandMove()
 {
 	_bossMoveTimer++;

@@ -30,10 +30,10 @@ private:
 	int _patternTimer;   // 패턴 내부 타이머
 	int _currentPattern; // 현재 실행 중인 패턴 번호
 
-	vector<BossProjectile> _bossProjectile;
+	double verticalSpeed;
+	double direction;
 
-	int shooterX;
-	int shooterY;
+	vector<BossProjectile> _bossProjectile;
 
 public:
 	// 보스 종류

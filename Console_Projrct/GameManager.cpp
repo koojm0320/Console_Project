@@ -8,7 +8,6 @@ GameManager::GameManager()
 	playerLife = 0;
 	playerInvincibleTimer = 0;
 	bossInvincibleTimer = 0;
-	WDLife = 1;
 
 	killCount = 0;
 

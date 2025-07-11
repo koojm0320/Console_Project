@@ -65,16 +65,16 @@ void StageSelect::StageRun()
 		else if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 		{
 			mciSendString(TEXT("play Kirby_Enter.wav from 0"), NULL, 0, NULL);
-			if (selectStage > 0 && !GameManager::StageClear[selectStage - 1])
-			{
-				mciSendString(TEXT("play Kirby_NoEntry.wav from 0"), NULL, 0, NULL);
-				cursorXY(68, 15);
-				TextColor(4, 15);
-				cout << "이전 스테이지를 클리어해야 입장 가능합니다!";
-				TextColor(15, 0);
-				Sleep(1000);
-				continue;
-			}
+			//if (selectStage > 0 && !GameManager::StageClear[selectStage - 1])
+			//{
+			//	mciSendString(TEXT("play Kirby_NoEntry.wav from 0"), NULL, 0, NULL);
+			//	cursorXY(68, 15);
+			//	TextColor(4, 15);
+			//	cout << "이전 스테이지를 클리어해야 입장 가능합니다!";
+			//	TextColor(15, 0);
+			//	Sleep(1000);
+			//	continue;
+			//}
 
 			int stageNum = (selectStage / 2) + 1;
 			int levelNum = (selectStage % 2) + 1;

@@ -22,7 +22,6 @@ class GameManager
 	bool playerInvincible;
 
 	// 적군 생존 관련 자료형
-	int WDLife;
 	int const ENEMY_KILL_COUNT = 10;
 	int killCount;
 	int daroachLife;

@@ -11,8 +11,6 @@
 class Menu
 {
 private:
-	Stage* _stage;
-	Dot* _dot;
 	ScreenDot* _screenDot;
 	StageSelect* _stageSelect;
 
