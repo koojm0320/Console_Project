@@ -3,7 +3,6 @@
 
 Player::Player()
 {
-	_shooterReset = true;
 	_alive = true;
 	_dot = new Dot;
 	_x = 1;
