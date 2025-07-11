@@ -48,6 +48,7 @@ void Player::LaserLogic()
 	if (laserFireTimer >= 30)
 	{
 		_laser.push_back(Laser(_x + 12, _y + 2));
+		PlaySound(TEXT("Kirby_Laser.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		laserFireTimer = 0;
 	}
 
@@ -55,6 +56,7 @@ void Player::LaserLogic()
 	{
 		if (_laser[i].activate)
 		{
+
 			_laser[i].x += 4;
 		}
 		if (_laser[i].x > 180)

@@ -91,6 +91,24 @@ void Menu::explane()
 {
 	system("cls");
 	_screenDot->ExplaneScreen();
+	TextColor(15, 0);
+	cursorXY(84, 20);
+	cout << "커비 슈팅 게임 !";
+	cursorXY(72, 22);
+	cout << "커비의 보물을 뺏어간 악당을 물리쳐 주세요 !";
+	TextColor(0, 15);
+	cursorXY(72, 25);
+	cout << "조작법 : 방향키 ( ←  →  ↑  ↓ )";
+	cursorXY(72, 27);
+	cout << "기본 공격 : 자동 공격";
+	cursorXY(72, 29);
+	cout << "기본 스테이지: 정해진 몹 수를 처지하면 클리어 !";
+	cursorXY(72, 31);
+	cout << "보스 스테이지: 보스의 체력이 0이 되면 클리어 !";
+	cursorXY(75, 48);
+	cout << " 메인 메뉴로 돌아가려면 ESC를 누르세요 ";
+	TextColor(7, 0);
+
 
 	while (true)
 	{
@@ -111,4 +129,5 @@ void Menu::printMenu()
 {
 	_screenDot = new ScreenDot;
 	_screenDot->MainScreen();
+	PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 }

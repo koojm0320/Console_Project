@@ -50,6 +50,8 @@ void GameManager::Stage1_1()
 	playerInvincible = false;
 	playerLife = 2;
 
+	PlaySound(TEXT("Kirby_Stage.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+
 	while (true)
 	{
 		system("cls");
@@ -64,6 +66,7 @@ void GameManager::Stage1_1()
 		{
 			Sleep(100);
 			playerLife = 2;
+			PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 			break;
 		}
 		
@@ -194,6 +197,7 @@ void GameManager::Stage2_1()
 		{
 			Sleep(100);
 			playerLife = 2;
+			PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 			break;
 		}
 
@@ -323,6 +327,8 @@ void GameManager::BossStage1()
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
 			Sleep(100);
+			playerLife = 2;
+			PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 			break;
 		}
 
@@ -538,6 +544,8 @@ void GameManager::BossStage2()
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
 			Sleep(100);
+			playerLife = 2;
+			PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 			break;
 		}
 

@@ -10,6 +10,9 @@
     <Filter Include="Project\소스 파일">
       <UniqueIdentifier>{2ed93222-48bc-4227-975b-2467ccc66e47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\사운드">
+      <UniqueIdentifier>{0ab25751-74f9-4610-afcd-2601e36e3b6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dot.h">
@@ -98,6 +101,17 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="..\..\..\..\Desktop\구진모_1114\콘솔 프로젝트\사운드\Kirby_Theme.wav" />
+    <Media Include="Kirby_Boss.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_Main.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_Stage.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
+    <Media Include="Kirby_Laser.wav">
+      <Filter>Project\사운드</Filter>
+    </Media>
   </ItemGroup>
 </Project>

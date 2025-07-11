@@ -55,7 +55,10 @@
     <Text Include="메모.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="..\..\..\..\Desktop\구진모_1114\콘솔 프로젝트\사운드\Kirby_Theme.wav" />
+    <Media Include="Kirby_Boss.wav" />
+    <Media Include="Kirby_Laser.wav" />
+    <Media Include="Kirby_Main.wav" />
+    <Media Include="Kirby_Stage.wav" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

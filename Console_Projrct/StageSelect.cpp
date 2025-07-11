@@ -22,12 +22,9 @@ StageSelect::~StageSelect()
 
 void StageSelect::StageRun()
 {
-
-
 	while (true)
 	{
 		system("cls");
-
 		cursorXY(70, 15);
 		cout << "스테이지를 선택해 주세요. (SPACE로 선택)" << endl;
 
@@ -72,12 +69,14 @@ void StageSelect::StageRun()
 			int levelNum = (selectStage % 2) + 1;
 			if (stageNum == 1)
 			{
+				PlaySound(NULL, 0, 0);
 				if (levelNum == 1) _stage->Stage1_Level1();
 				else if (levelNum == 2) _stage->Stage1_Boss();
 				continue;
 			}
 			else if (stageNum == 2)
 			{
+				PlaySound(NULL, 0, 0);
 				if (levelNum == 1) _stage->Stage2_Level1();
 				else if (levelNum == 2)
 				{
