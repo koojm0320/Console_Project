@@ -40,7 +40,7 @@ void StageSelect::StageRun()
 		}
 
 		if (selectStage < 0) selectStage = 0;
-		if (selectStage >= stageCount) selectStage = stageCount - 1;
+		if (selectStage >= stageCount) selectStage = 3;
 
 		cursorXY(stagePosX[selectStage] - 3, stagePosY - 2);
 		_dot->KirbyStageSelect(stagePosX[selectStage] - 3, stagePosY - 2);
@@ -92,7 +92,6 @@ void StageSelect::StageRun()
 
 						while (true)
 						{
-
 							if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 							{
 								Sleep(150);

@@ -48,6 +48,7 @@
     <ClInclude Include="ScreenDot.h">
       <Filter>Project\헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dot.cpp">
@@ -89,10 +90,14 @@
     <ClCompile Include="ScreenDot.cpp">
       <Filter>Project\소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="메모.txt">
       <Filter>Project</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\..\..\Desktop\구진모_1114\콘솔 프로젝트\사운드\Kirby_Theme.wav" />
   </ItemGroup>
 </Project>

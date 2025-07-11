@@ -1,10 +1,11 @@
 #include "MainGame.h"
+#include "Common.h"
 #include <time.h>
 
 int main()
 {
 	// 커서 안보이게
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	CONSOLE_CURSOR_INFO c = { 0 };
 	c.dwSize = 1;
 	c.bVisible = 0; 
