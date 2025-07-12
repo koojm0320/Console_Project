@@ -20,6 +20,9 @@ int main()
 	c.bVisible = 0; 
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &c); 
 
+
+	//GameManager mg;
+	//mg.Stage1_1();
 	Menu mg;
 	return 0;
 }

@@ -48,6 +48,9 @@ Menu::Menu()
 		else if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 		{
 			mciSendString(TEXT("play Kirby_Enter.wav from 0"), NULL, 0, NULL);
+
+			while (GetAsyncKeyState(VK_RETURN) & 0x8000);
+
 			if (select == 0)
 			{
 				_stageSelect = new StageSelect;
@@ -104,8 +107,10 @@ void Menu::explane()
 	cursorXY(72, 27);
 	cout << "기본 공격 : 자동 공격";
 	cursorXY(72, 29);
-	cout << "기본 스테이지: 정해진 몹 수를 처지하면 클리어 !";
+	cout << "스킬 사용 : 스페이스바 ( 5초 동안 공격속도 2배 )";
 	cursorXY(72, 31);
+	cout << "기본 스테이지: 정해진 몹 수를 처지하면 클리어 !";
+	cursorXY(72, 33);
 	cout << "보스 스테이지: 보스의 체력이 0이 되면 클리어 !";
 	
 	TextColor(15, 0);

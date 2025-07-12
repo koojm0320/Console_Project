@@ -24,7 +24,6 @@
     <ClInclude Include="Dot.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ScreenDot.h" />
@@ -39,7 +38,6 @@
     </ClCompile>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -64,6 +62,7 @@
     <Media Include="Kirby_Laser.wav" />
     <Media Include="Kirby_Main.wav" />
     <Media Include="Kirby_NoEntry.wav" />
+    <Media Include="Kirby_PowerUp.wav" />
     <Media Include="Kirby_Stage.wav" />
     <Media Include="Kirby_StageClear.wav" />
     <Media Include="Kirby_TrashMobDie.wav" />

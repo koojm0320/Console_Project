@@ -7,7 +7,6 @@ Player::Player()
 	_dot = new Dot;
 	_x = 1;
 	_y = 1;
-
 }
 
 Player::~Player()
@@ -20,8 +19,8 @@ void Player::MoveLogic()
 {
 	cursorXY(_x, _y);
 
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
-		system("pause");
+	//if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+	//	system("pause");
 
 	// player 이동
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000) _x -= 2;
@@ -35,6 +34,7 @@ void Player::MoveLogic()
 	if (_y < 1) _y = 1;
 	if (_y > 44) _y = 44;
 
+	UpdateSkillTimers();
 	_dot->kirby(_x, _y);
 	
 }
@@ -44,7 +44,10 @@ void Player::LaserLogic()
 {
 	static int laserFireTimer = 0;
 	laserFireTimer++;
-	if (laserFireTimer >= 30)
+
+	int fireInterval = _isSpeedUp ? 15 : 30;
+
+	if (laserFireTimer >= fireInterval)
 	{
 		_laser.push_back(Laser(_x + 12, _y + 2));
 		mciSendString(TEXT("play Kirby_Laser.wav from 0"), NULL, 0, NULL);
@@ -95,6 +98,41 @@ vector<Laser>& Player::getLaser()
 	// TODO: 여기에 return 문을 삽입합니다.
 	return _laser;
 }
+
+void Player::ActivateSpeedBoost()
+{
+	if (_skillCooldown == 0)
+	{
+		mciSendString(TEXT("play Kirby_PowerUp.wav from 0"), NULL, 0, NULL);
+		_isSpeedUp = true;
+		_speedUpTimer = 150;   // 5초간 지속 (60프레임 기준)
+		_skillCooldown = 300;  // 10초의 쿨타임 설정 (60프레임 기준)
+	}
+}
+
+void Player::UpdateSkillTimers()
+{
+	if (_speedUpTimer > 0)
+	{
+		_speedUpTimer--;
+		if (_speedUpTimer == 0)
+		{
+			_isSpeedUp = false; // 지속시간이 끝나면 효과 종료
+		}
+	}
+
+	// 스킬 쿨타임 감소
+	if (_skillCooldown > 0)
+	{
+		_skillCooldown--;
+	}
+
+	TextColor(0, 11);
+	cursorXY(34, 44);
+	printf("쿨타임: %.1fs", _skillCooldown / 30.0);
+	TextColor(15, 0);
+}
+
 
 void Player::Die()
 {

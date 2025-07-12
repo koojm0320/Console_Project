@@ -9,6 +9,7 @@ Dot::Dot()
 
 Dot::~Dot()
 {
+    // !
 }
 
 void Dot::kirby(short posX, short posY)
@@ -400,20 +401,22 @@ void Dot::LifeDec(short posX, short posY)
     }
 }
 
-void Dot::HPUp(short posX, short posY)
+void Dot::PowerUp(short posX, short posY)
 {
-    _hpUp = {
-        {4,0,4},
-        {4,4,4},
-        {0,4,0}
+    _powerUp = {
+        {13,11,13,11,11},
+        {13,11,5,5,5},
+        {13,13,5,11,5},
+        {11,11,5,5,5},
+        {11,11,5,11,11}
     };
 
-    for (unsigned int i = 0; i < _hpUp.size(); i++)
+    for (unsigned int i = 0; i < _powerUp.size(); i++)
     {
         cursorXY(posX, posY + i);
-        for (unsigned int j = 0; j < _hpUp[i].size(); j++)
+        for (unsigned int j = 0; j < _powerUp[i].size(); j++)
         {
-            int colorNum = _hpUp[i][j];
+            int colorNum = _powerUp[i][j];
 
             if (colorNum > 16 || colorNum < 0)
             {
@@ -429,49 +432,22 @@ void Dot::HPUp(short posX, short posY)
     }
 }
 
-void Dot::AtkPowerUp(short posX, short posY)
+void Dot::PowerUpCooldown(short posX, short posY)
 {
-    _atkPowerUp = {
-        {13,13,13},
-        {0,13,0},
-        {13,13,13}
+    _powerUpCooldown = {
+        {15,8,15,8,8},
+        {15,8,7,7,7},
+        {15,15,7,8,7},
+        {8,8,7,7,7},
+        {8,8,7,8,8}
     };
 
-    for (unsigned int i = 0; i < _atkPowerUp.size(); i++)
+    for (unsigned int i = 0; i < _powerUpCooldown.size(); i++)
     {
         cursorXY(posX, posY + i);
-        for (unsigned int j = 0; j < _atkPowerUp[i].size(); j++)
+        for (unsigned int j = 0; j < _powerUpCooldown[i].size(); j++)
         {
-            int colorNum = _atkPowerUp[i][j];
-
-            if (colorNum > 16 || colorNum < 0)
-            {
-                TextColor(15, 0);
-            }
-            else
-            {
-                TextColor(colorNum, colorNum);
-            }
-            cout << "¤±";
-        }
-        TextColor(15, 0);
-    }
-}
-
-void Dot::AtkSpeedUp(short posX, short posY)
-{
-    _atkSpeedUp = {
-        {11,11,11},
-        {0,11,0},
-        {11,11,11}
-    };
-
-    for (unsigned int i = 0; i < _atkSpeedUp.size(); i++)
-    {
-        cursorXY(posX, posY + i);
-        for (unsigned int j = 0; j < _atkSpeedUp[i].size(); j++)
-        {
-            int colorNum = _atkSpeedUp[i][j];
+            int colorNum = _powerUpCooldown[i][j];
 
             if (colorNum > 16 || colorNum < 0)
             {

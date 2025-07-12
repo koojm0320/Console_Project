@@ -55,9 +55,14 @@ void GameManager::Stage1_1()
 
 	while (true)
 	{
+		if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+		{
+			_player->ActivateSpeedBoost();
+		}
 		system("cls");
 		HitBox();
 		CollisionDec();
+
 
 		_player->MoveLogic();
 		_player->LaserLogic();
@@ -110,7 +115,6 @@ void GameManager::Stage1_1()
 					mciSendString(TEXT("play Kirby_TrashMobDie.wav from 0"), NULL, 0, NULL);
 					_dot->WaddleDeeHit(_enemy->getTrashMob()[j].x, _enemy->getTrashMob()[j].y);
 					killCount++;
-
 					break;
 				}
 			}
@@ -149,6 +153,7 @@ void GameManager::Stage1_1()
 			}
 		}
 
+		// 플레이어 체력 표시
 		for (int i = 0; i < playerLife + 1; i++)
 		{
 			_dot->Life(1 + i * 11, 45);
@@ -156,6 +161,17 @@ void GameManager::Stage1_1()
 		for (int i = playerLife + 1; i < lifeCount; i++)
 		{
 			_dot->LifeDec(1 + i * 11, 45);
+		}
+
+		if (_player->getSkillCooldown() > 0)
+		{
+			// 쿨타임이 돌고 있을 때
+			_dot->PowerUpCooldown(35, 45);
+		}
+		else
+		{
+			// 스킬을 사용할 수 있을 때
+			_dot->PowerUp(35, 45);
 		}
 
 		if (killCount >= ENEMY_KILL_COUNT)
@@ -190,13 +206,24 @@ void GameManager::Stage2_1()
 
 	while (true)
 	{
+		if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+		{
+			_player->ActivateSpeedBoost();
+		}
+
 		system("cls");
 		HitBox();
 		CollisionDec();
+		
 
 		_player->MoveLogic();
 		_player->LaserLogic();
 		_enemy->EnemySpawnLogic();
+
+		cursorXY(85, 1);
+		TextColor(0, 15);
+		printf("남은 적: %d ", ENEMY_KILL_COUNT - killCount);
+		TextColor(15, 0);
 
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
@@ -287,6 +314,18 @@ void GameManager::Stage2_1()
 			_dot->LifeDec(1 + i * 11, 45);
 		}
 
+		if (_player->getSkillCooldown() > 0)
+		{
+			// 쿨타임이 돌고 있을 때
+			_dot->PowerUpCooldown(35, 45);
+		}
+		else
+		{
+			// 스킬을 사용할 수 있을 때
+			_dot->PowerUp(35, 45);
+		}
+
+
 		if (killCount >= ENEMY_KILL_COUNT)
 		{
 			PlaySound(NULL, 0, 0);
@@ -300,9 +339,6 @@ void GameManager::Stage2_1()
 			PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 			break;
 		}
-
-		cursorXY(85, 1);
-		printf("남은 적: %d", ENEMY_KILL_COUNT - killCount);
 
 		Sleep(10);
 	}
@@ -323,8 +359,12 @@ void GameManager::BossStage1()
 
 	while (true)
 	{
-		system("cls");
+		if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+		{
+			_player->ActivateSpeedBoost();
+		}
 
+		system("cls");
 		HitBox();
 		CollisionDec();
 
@@ -346,7 +386,7 @@ void GameManager::BossStage1()
 		_boss->UpdatePattern1();
 		_boss->RandMove();
 
-		// ========================== boss 피격 애니메이션 ======================
+		// boss 피격 애니메이션
 		if (_boss->isAlive())
 		{
 			if (_boss->isHit())
@@ -385,7 +425,7 @@ void GameManager::BossStage1()
 				playerInvincible = false;
 			}
 		}
-		// ========================= playerLaser -> Boss 피격 =========================
+		// playerLaser -> Boss 피격
 		for (size_t i = 0; i < _player->getLaser().size(); i++)
 		{
 			if (!_player->getLaser()[i].activate)
@@ -429,12 +469,10 @@ void GameManager::BossStage1()
 					PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 					return;
 				}
-				// if 구역
 			}
-			// for문 구역
 		}
 
-		//========================== BossLaser->player 피격 ==========================
+		// BossLaser->player 피격
 
 		vector<BossProjectile>& projectiles = _boss->getBossProjectile();
 
@@ -459,7 +497,7 @@ void GameManager::BossStage1()
 			}
 		}
 
-		//=======================   boss 발사체   =======================
+		// boss 발사체
 
 		for (size_t i = 0; i < projectiles.size(); ++i)
 		{
@@ -473,7 +511,7 @@ void GameManager::BossStage1()
 		}
 
 
-		//======================== Daroach 체력 표기 ==========================
+		// Daroach 체력 표기
 		for (int i = 0; i < daroachLife + 1; i++)
 		{
 			TextColor(4, 4);
@@ -514,6 +552,7 @@ void GameManager::BossStage1()
 			}
 		}
 
+		// 플레이어 체력 도트 출력
 		for (int i = 0; i < playerLife + 1; i++)
 		{
 			_dot->Life(1 + i * 11, 45);
@@ -523,7 +562,20 @@ void GameManager::BossStage1()
 			_dot->LifeDec(1 + i * 11, 45);
 		}
 
-		Sleep(16);
+		// 스킬 쿨타임 도트 출력
+		if (_player->getSkillCooldown() > 0)
+		{
+			// 쿨타임이 돌고 있을 때
+			_dot->PowerUpCooldown(35, 45);
+		}
+		else
+		{
+			// 스킬을 사용할 수 있을 때
+			_dot->PowerUp(35, 45);
+		}
+
+
+		Sleep(10);
 	}
 }
 
@@ -542,17 +594,15 @@ void GameManager::BossStage2()
 
 	while (true)
 	{
+		if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+		{
+			_player->ActivateSpeedBoost();
+		}
+
 		system("cls");
-		_player->MoveLogic();
-		_player->LaserLogic();
-		_boss->MetaKnight();
-		_boss->BossLaserLogic();
-		_boss->UpdatePattern2();
-		_boss->RandMove();
 
 		HitBox();
 		isCollide = false;
-		// CollisionDec();
 
 
 		cursorXY(75, 1);
@@ -566,8 +616,14 @@ void GameManager::BossStage2()
 			break;
 		}
 
+		_player->MoveLogic();
+		_player->LaserLogic();
+		_boss->MetaKnight();
+		_boss->BossLaserLogic();
+		_boss->UpdatePattern2();
+		_boss->RandMove();
 
-		// ========================== boss 피격 애니메이션 ======================
+		// boss 피격 애니메이션
 		if (_boss->isAlive())
 		{
 			if (_boss->isHit())
@@ -606,7 +662,7 @@ void GameManager::BossStage2()
 				playerInvincible = false;
 			}
 		}
-		// ========================= playerLaser -> Boss 피격 =========================
+		// playerLaser -> Boss 피격
 		for (size_t i = 0; i < _player->getLaser().size(); i++)
 		{
 			if (!_player->getLaser()[i].activate)
@@ -654,7 +710,7 @@ void GameManager::BossStage2()
 			// for문 구역
 		}
 
-		//========================== BossLaser->player 피격 ==========================
+		// BossLaser->player 피격
 
 		vector<BossProjectile>& projectiles = _boss->getBossProjectile();
 
@@ -679,7 +735,7 @@ void GameManager::BossStage2()
 			}
 		}
 
-		//========================== Boss->player 피격 ==========================
+		// Boss->player 피격
 		if (!playerInvincible &&
 			_boss->isAlive() &&
 			playerRight >= metaKnightLeft && 
@@ -689,9 +745,7 @@ void GameManager::BossStage2()
 		{
 			isCollide = true;
 		}
-		//=======================   boss 발사체   =======================
-
-		// vector<BossProjectile>& bossProjectiles = _boss->getBossProjectile();
+		// boss 발사체
 		for (size_t i = 0; i < projectiles.size(); ++i)
 		{
 			if (projectiles[i].activate)
@@ -704,7 +758,7 @@ void GameManager::BossStage2()
 		}
 
 
-		//======================== metaKnightLife 체력 표기 ==========================
+		// metaKnightLife 체력 표기
 		for (int i = 0; i < metaKnightLife + 1; i++)
 		{
 			TextColor(4, 4);
@@ -720,6 +774,7 @@ void GameManager::BossStage2()
 			TextColor(15, 0);
 		}
 
+		// 플레이어 피격 로직
 		if (isCollide && !playerInvincible)
 		{
 			mciSendString(TEXT("play Kirby_Hit.wav from 0"), NULL, 0, NULL);
@@ -745,6 +800,7 @@ void GameManager::BossStage2()
 			}
 		}
 
+		// 플레이어 체력 표시 도트
 		for (int i = 0; i < playerLife + 1; i++)
 		{
 			_dot->Life(1 + i * 11, 45);
@@ -754,10 +810,21 @@ void GameManager::BossStage2()
 			_dot->LifeDec(1 + i * 11, 45);
 		}
 
-		Sleep(16);
+		if (_player->getSkillCooldown() > 0)
+		{
+			// 쿨타임이 돌고 있을 때
+			_dot->PowerUpCooldown(35, 45);
+		}
+		else
+		{
+			// 스킬을 사용할 수 있을 때
+			_dot->PowerUp(35, 45);
+		}
+
+		Sleep(10);
 	}
 }
-// ==============================  HitBox	============================
+// ==============================   HitBox   ============================
 void GameManager::HitBox()
 {
 	// player히트박스
@@ -814,6 +881,3 @@ void GameManager::CollisionDec()
 		}
 	}
 }
-
-
-// ============================  Item  ===================================

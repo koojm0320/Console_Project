@@ -14,13 +14,20 @@ struct Laser
 class Player
 {
 private:
-	int _x, _y;
 	Dot* _dot;
-
+	
+	// 플레이어 생존, 위치
+	int _x, _y;
 	bool _alive;
+	
+	// 스킬 관련
+	bool _isSpeedUp;
+	int _speedUpTimer;
+	int _skillCooldown;
 
 	// 레이저 목록 벡터
 	vector<Laser> _laser;
+
 
 public:
 	// 플레이어&레이저 이동 및 발사 로직
@@ -37,6 +44,12 @@ public:
 	int getX() { return _x; }
 	int getY() { return _y; }
 	vector<Laser>& getLaser();
+
+	int getSkillCooldown() const { return _skillCooldown; }
+
+	// 아이템 효과 적용
+	void ActivateSpeedBoost();
+	void UpdateSkillTimers();
 
 
 	Player();

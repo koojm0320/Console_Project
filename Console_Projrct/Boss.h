@@ -15,21 +15,20 @@ class Boss
 {
 private:
 	Dot* _dot;
+
+	// 보스 생존, 위치 관련
 	int _x;
 	int _y;
-
-	bool _isDash;
-	int _dashSpeed;
-	int _originX;
-
 	bool _alive;
 	bool _isHit;
 
+	// 보스 패턴 관련
+	bool _isDash;
+	int _dashSpeed;
+	int _originX;
 	int _bossMoveTimer;
-
-	int _patternTimer;   // 패턴 내부 타이머
-	int _currentPattern; // 현재 실행 중인 패턴 번호
-
+	int _patternTimer;
+	int _currentPattern;
 	double verticalSpeed;
 	double direction;
 

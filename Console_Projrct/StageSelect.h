@@ -12,6 +12,8 @@ private:
 	Stage* _stage;
 	Dot* _dot;
 	ScreenDot* _screenDot;
+
+	// 스테이지 선택 관련 변수
 	int stageCount;
 	int selectStage;
 	const int stagePosX[4] = { 30, 60, 120, 150 };

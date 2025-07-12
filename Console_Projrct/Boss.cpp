@@ -266,7 +266,6 @@ void Boss::RandMove()
 
 vector<BossProjectile>& Boss::getBossProjectile()
 {
-	// TODO: 여기에 return 문을 삽입합니다.
 	return _bossProjectile;
 }
 

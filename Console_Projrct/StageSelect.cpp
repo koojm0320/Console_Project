@@ -27,7 +27,7 @@ void StageSelect::StageRun()
 		system("cls");
 		cursorXY(70, 15);
 		TextColor(0, 15);
-		cout << "스테이지를 선택해 주세요. (SPACE로 선택)" << endl;
+		cout << "스테이지를 선택해 주세요. (ENTER로 선택)" << endl;
 		TextColor(15, 0);
 
 		cursorXY(84, 48);
@@ -62,7 +62,7 @@ void StageSelect::StageRun()
 			selectStage++;
 			Sleep(100);
 		}
-		else if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+		else if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 		{
 			mciSendString(TEXT("play Kirby_Enter.wav from 0"), NULL, 0, NULL);
 			if (selectStage > 0 && !GameManager::StageClear[selectStage - 1])
