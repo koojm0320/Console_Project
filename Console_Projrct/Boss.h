@@ -48,7 +48,6 @@ public:
 	bool isHit() const { return _isHit; }
 	void setHit(bool isHit) { _isHit = isHit; }
 
-
 	void DaroachHit();
 	void DaroachClear();
 
@@ -66,6 +65,8 @@ public:
 	void BossPattern2();
 	void BossPattern3();
 	void BossPattern4();
+
+	void EraseBossPattern();
 
 	void BossDash();
 

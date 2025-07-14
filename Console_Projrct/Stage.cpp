@@ -22,6 +22,7 @@ void Stage::Stage1_Level1()
 	system("cls");
 	_screenDot->Stage1_1();
 	Sleep(2000);
+	system("cls");
 	_gameManager->Stage1_1();
 }
 
@@ -33,6 +34,7 @@ void Stage::Stage1_Boss()
 	system("cls");
 	_screenDot->Stage1_Boss();
 	Sleep(2000);
+	system("cls");
 	_gameManager->BossStage1();
 }
 
@@ -44,6 +46,7 @@ void Stage::Stage2_Level1()
 	system("cls");
 	_screenDot->Stage2_1();
 	Sleep(2000);
+	system("cls");
 	_gameManager->Stage2_1();
 }
 
@@ -55,5 +58,6 @@ void Stage::Stage2_Boss()
 	system("cls");
 	_screenDot->Stage2_Boss();
 	Sleep(2000);
+	system("cls");
 	_gameManager->BossStage2();
 }

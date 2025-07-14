@@ -5,6 +5,7 @@
 struct Laser
 {
 	int x, y;
+
 	int width = 4;
 	int height = 1;
 	bool activate;
@@ -20,6 +21,9 @@ private:
 	int _x, _y;
 	bool _alive;
 	bool _isMove;
+
+	int oldX;
+	int oldY;
 	
 	// 스킬 관련
 	bool _isSpeedUp;

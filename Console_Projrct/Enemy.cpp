@@ -5,6 +5,8 @@ Enemy::Enemy()
 {
 	_dot = new Dot;
 	_alive = true;
+	_y = 0;
+	_x = 0;
 }
 
 Enemy::~Enemy()
@@ -16,7 +18,7 @@ void Enemy::EnemySpawnLogic()
 {
 	static int enemySpawnTimer = 0;
 	enemySpawnTimer++;
-	if (enemySpawnTimer >= 20)
+	if (enemySpawnTimer >= 40)
 	{
 		int randY = rand() % 40 + 1;
 		_trashMob.push_back(TrashMob(170, randY));
@@ -27,6 +29,15 @@ void Enemy::EnemySpawnLogic()
 	{
 		if (_trashMob[i].isAlive)
 		{
+			int oldX = _trashMob[i].x;
+			int oldY = _trashMob[i].y;
+
+			TextColor(0, 0);
+			for (int row = 0; row < 8; ++row)
+			{
+				cursorXY(oldX, oldY + row);
+				cout << "            ";
+			}
 			_trashMob[i].x -= 1;
 			int dir = rand() % 3 - 1;
 			_trashMob[i].y += dir;
@@ -37,9 +48,15 @@ void Enemy::EnemySpawnLogic()
 		}
 
 		if (_trashMob[i].y < 1) _trashMob[i].y = 1;
-		if (_trashMob[i].y > 44) _trashMob[i].y = 44;
+		if (_trashMob[i].y > 44 - 5) _trashMob[i].y = 44 - 5;
+
+		if (_trashMob[i].isAlive)
+		{
+			_dot->WaddleDee(_trashMob[i].x, _trashMob[i].y);
+		}
 	}
 
+	/*
 	for (size_t i = 0; i < _trashMob.size(); ++i)
 	{
 		if (_trashMob[i].isAlive)
@@ -47,6 +64,7 @@ void Enemy::EnemySpawnLogic()
 			_dot->WaddleDee(_trashMob[i].x, _trashMob[i].y);
 		}
 	}
+	*/
 }
 
 
@@ -58,4 +76,9 @@ vector<TrashMob>& Enemy::getTrashMob()
 void Enemy::EnemyUpdate()
 {
 
+}
+
+void Enemy::ResetEnemy()
+{
+	
 }

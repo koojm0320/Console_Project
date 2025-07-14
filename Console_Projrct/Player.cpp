@@ -8,6 +8,12 @@ Player::Player()
 	_dot = new Dot;
 	_x = 1;
 	_y = 1;
+	oldX = _x;
+	oldY = _y;
+
+	_isSpeedUp = false;
+	_speedUpTimer = 0;
+	_skillCooldown = 0;
 }
 
 Player::~Player()
@@ -23,39 +29,43 @@ void Player::MoveLogic()
 	UpdatePlayerMove();
 
 	// player 이동
-	if (_isMove)
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 	{
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-		{
-			_x -= 2;
-			_dot->kirby(_x, _y);
-		}
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-		{
-			_x += 2;
-			_dot->kirby(_x, _y);
-		}
-		if (GetAsyncKeyState(VK_UP) & 0x8000)
-		{
-			--_y;
-			_dot->kirby(_x, _y);
-		}
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-		{
-			++_y;
-			_dot->kirby(_x, _y);
-		}
+		_x -= 2;
+		_isMove = true;
 	}
-	else
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 	{
-		_dot->kirby(_x, _y);
+		_x += 2;
+		_isMove = true;
 	}
-
+	if (GetAsyncKeyState(VK_UP) & 0x8000)
+	{
+		--_y;
+		_isMove = true;
+	}
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+	{
+		++_y;
+		_isMove = true;
+	}
 	// 플레이어 이동 범위 제한
-	if (_x + 1 < 1) _x = 2;
-	if (_x + 1 > 166) _x = 167;
+	if (_x < 1) _x = 1;
+	if (_x > 166) _x = 166;
 	if (_y < 1) _y = 1;
 	if (_y > 42) _y = 42;
+
+	if (_isMove)
+	{
+		for (int i = 0; i < 9; ++i)
+		{
+			cursorXY(oldX - 1, oldY - 1 + i);
+			TextColor(0, 0);
+			cout << "         ";
+		}
+	}
+
+	_dot->kirby(_x, _y);
 
 	UpdateSkillTimers();
 
@@ -92,27 +102,38 @@ void Player::LaserLogic()
 	{
 		if (_laser[i].activate)
 		{
-
-			_laser[i].x += 4;
+			cursorXY(_laser[i].x, _laser[i].y);
+			TextColor(0, 0);
+			cout << "     "; // 레이저 크기(2칸)만큼 공백으로 덮기
 		}
+
+		_laser[i].x += 4;
+
 		if (_laser[i].x > 180)
 		{
 			_laser[i].activate = false;
 		}
-	}
 
-	for (size_t i = 0; i < _laser.size(); ++i)
-	{
 		if (_laser[i].activate)
 		{
 			cursorXY(_laser[i].x, _laser[i].y);
 			TextColor(6, 6);
 			cout << "ㅁㅁ";
-			cursorXY(_laser[i].x - 4, _laser[i].y);
-			TextColor(0, 0);
-			cout << "    ";
 		}
 	}
+
+	//for (size_t i = 0; i < _laser.size(); ++i)
+	//{
+	//	if (_laser[i].activate)
+	//	{
+	//		cursorXY(_laser[i].x, _laser[i].y);
+	//		TextColor(6, 6);
+	//		cout << "ㅁㅁ";
+	//		cursorXY(_laser[i].x - 4, _laser[i].y);
+	//		TextColor(0, 0);
+	//		cout << "    ";
+	//	}
+	//}
 }
 
 

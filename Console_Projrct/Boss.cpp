@@ -108,6 +108,7 @@ void Boss::UpdatePattern1()
 	{
 		_patternTimer = 0;
 		_currentPattern = (_currentPattern + 1) % 2;
+		EraseBossPattern();
 		_bossProjectile.clear();
 	}
 
@@ -129,6 +130,7 @@ void Boss::UpdatePattern2()
 	{
 		_patternTimer = 0;
 		_currentPattern = (_currentPattern + 1) % 3;
+		EraseBossPattern();
 		_bossProjectile.clear();
 	}
 
@@ -161,7 +163,7 @@ void Boss::BossPattern1()
 
 		if (verticalSpeed > 1.5 || verticalSpeed < -1.5)
 		{
-			direction *= -1.2;
+			direction *= -1;
 		}
 
 	}
@@ -198,7 +200,7 @@ void Boss::BossPattern3()
 // 검기
 void Boss::BossPattern4()
 {
-	if (_patternTimer % 40 == 0)
+	if (_patternTimer % 20 == 0)
 	{
 		_bossProjectile.push_back(BossProjectile(_x + 2, _y + 4, -3.0, 0.0));
 		_bossProjectile.push_back(BossProjectile(_x, _y + 6, -3.0, 0.0));
@@ -227,6 +229,19 @@ void Boss::BossPattern4()
 	}
 }
 
+// 보스 이전 패턴 지우기
+void Boss::EraseBossPattern()
+{
+	for (size_t i = 0; i < _bossProjectile.size(); ++i)
+	{
+		if (_bossProjectile[i].activate)
+		{
+			cursorXY(_bossProjectile[i].x, _bossProjectile[i].y);
+			TextColor(0, 0);
+			cout << "  ";
+		}
+	}
+}
 // 대쉬
 void Boss::BossDash()
 {
@@ -238,6 +253,12 @@ void Boss::BossDash()
 
 	if (_isDash)
 	{
+		TextColor(0, 0);
+		for (int i = 0; i < 14; ++i) {
+			cursorXY(_x, _y + i);
+			cout << "                                    ";
+		}
+
 		_x += _dashSpeed;
 
 		if (_x + 10 < 1)
@@ -258,7 +279,12 @@ void Boss::RandMove()
 	if (_bossMoveTimer > 120)
 	{
 		_bossMoveTimer = 0;
-
+		//TextColor(0, 0);
+		//for (int i = 0; i < 15; ++i)
+		//{
+		//	cursorXY(_x, _y + i);
+		//	cout << "                        ";
+		//}
 		_y = (rand() % 26) + 5;
 	}
 }

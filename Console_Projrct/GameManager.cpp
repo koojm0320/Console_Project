@@ -69,9 +69,8 @@ void GameManager::Stage1_1()
 		_enemy->EnemySpawnLogic();
 
 		cursorXY(85, 1);
-		TextColor(0, 15);
-		printf("남은 적: %d ", ENEMY_KILL_COUNT - killCount);
 		TextColor(15, 0);
+		printf("남은 적: %d ", ENEMY_KILL_COUNT - killCount);
 
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
@@ -110,10 +109,28 @@ void GameManager::Stage1_1()
 					laserHeight <= enemyBottom && laserHeight >= enemyTop)
 				{
 					_player->getLaser()[i].activate = false;
+
+					cursorXY(_player->getLaser()[i].x, _player->getLaser()[i].y);
+					TextColor(0, 0);
+					cout << "    "; // 레이저 크기(2칸)만큼 공백으로 덮기
+					// 추가
+					int enemyX = _enemy->getTrashMob()[j].x;
+					int enemyY = _enemy->getTrashMob()[j].y;
+
 					_enemy->getTrashMob()[j].isAlive = false;
 
 					mciSendString(TEXT("play Kirby_TrashMobDie.wav from 0"), NULL, 0, NULL);
 					_dot->WaddleDeeHit(_enemy->getTrashMob()[j].x, _enemy->getTrashMob()[j].y);
+
+					Sleep(50);
+
+					TextColor(0, 0);
+					for (int row = 0; row < 8; ++row)
+					{
+						cursorXY(enemyX, enemyY + row);
+						cout << "              ";
+					}
+
 					killCount++;
 					break;
 				}
@@ -148,6 +165,7 @@ void GameManager::Stage1_1()
 				_screenDot->GameOver();
 				mciSendString(TEXT("play Kirby_GameOver.wav from 0"), NULL, 0, NULL);
 				Sleep(4000);
+				system("cls");
 				PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 				break;
 			}
@@ -183,7 +201,8 @@ void GameManager::Stage1_1()
 			StageClear[0] = true;
 			PlaySound(TEXT("Kirby_StageClear.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			_screenDot->StageClear();
-			Sleep(2000);
+			Sleep(3000);
+			system("cls");
 			PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 			break;
 		}
@@ -210,23 +229,22 @@ void GameManager::Stage2_1()
 		{
 			_player->ActivateSpeedBoost();
 		}
-
-		system("cls");
+		//system("cls");
 		HitBox();
 		CollisionDec();
-		
+
 
 		_player->MoveLogic();
 		_player->LaserLogic();
 		_enemy->EnemySpawnLogic();
 
 		cursorXY(85, 1);
-		TextColor(0, 15);
-		printf("남은 적: %d ", ENEMY_KILL_COUNT - killCount);
 		TextColor(15, 0);
+		printf("남은 적: %d ", ENEMY_KILL_COUNT - killCount);
 
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
+			mciSendString(TEXT("play Kirby_ESC.wav from 0"), NULL, 0, NULL);
 			Sleep(100);
 			playerLife = 2;
 			PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
@@ -261,12 +279,29 @@ void GameManager::Stage2_1()
 					laserHeight <= enemyBottom && laserHeight >= enemyTop)
 				{
 					_player->getLaser()[i].activate = false;
+
+					cursorXY(_player->getLaser()[i].x, _player->getLaser()[i].y);
+					TextColor(0, 0);
+					cout << "    "; // 레이저 크기(2칸)만큼 공백으로 덮기
+					// 추가
+					int enemyX = _enemy->getTrashMob()[j].x;
+					int enemyY = _enemy->getTrashMob()[j].y;
+
 					_enemy->getTrashMob()[j].isAlive = false;
 
 					mciSendString(TEXT("play Kirby_TrashMobDie.wav from 0"), NULL, 0, NULL);
 					_dot->WaddleDeeHit(_enemy->getTrashMob()[j].x, _enemy->getTrashMob()[j].y);
+
+					Sleep(50);
+
+					TextColor(0, 0);
+					for (int row = 0; row < 8; ++row)
+					{
+						cursorXY(enemyX, enemyY + row);
+						cout << "              ";
+					}
+
 					killCount++;
-					
 					break;
 				}
 			}
@@ -300,11 +335,13 @@ void GameManager::Stage2_1()
 				_screenDot->GameOver();
 				mciSendString(TEXT("play Kirby_GameOver.wav from 0"), NULL, 0, NULL);
 				Sleep(4000);
+				system("cls");
 				PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 				break;
 			}
 		}
 
+		// 플레이어 체력 표시
 		for (int i = 0; i < playerLife + 1; i++)
 		{
 			_dot->Life(1 + i * 11, 45);
@@ -325,7 +362,6 @@ void GameManager::Stage2_1()
 			_dot->PowerUp(35, 45);
 		}
 
-
 		if (killCount >= ENEMY_KILL_COUNT)
 		{
 			PlaySound(NULL, 0, 0);
@@ -335,7 +371,8 @@ void GameManager::Stage2_1()
 			StageClear[2] = true;
 			PlaySound(TEXT("Kirby_StageClear.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			_screenDot->StageClear();
-			Sleep(2000);
+			Sleep(3000);
+			system("cls");
 			PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 			break;
 		}
@@ -359,11 +396,6 @@ void GameManager::BossStage1()
 
 	while (true)
 	{
-		if (GetAsyncKeyState(VK_SPACE) & 0x8000)
-		{
-			_player->ActivateSpeedBoost();
-		}
-
 		//system("cls");
 		HitBox();
 		CollisionDec();
@@ -379,10 +411,21 @@ void GameManager::BossStage1()
 			break;
 		}
 
+		// 보스 잔상 제거
+		if (_boss->isAlive())
+		{
+			TextColor(0, 0);
+			for (int i = 0; i < 15; ++i)
+			{
+				cursorXY(_boss->getX(), _boss->getY() + i);
+				cout << "                        ";
+			}
+		}
+
 		_player->MoveLogic();
 		_player->LaserLogic();
 		_boss->Daroach();
-		_boss->BossLaserLogic();
+		//_boss->BossLaserLogic();
 		_boss->UpdatePattern1();
 		_boss->RandMove();
 
@@ -448,6 +491,10 @@ void GameManager::BossStage1()
 				_player->getLaser()[i].activate = false;
 				mciSendString(TEXT("play Kirby_BossDamage.wav from 0"), NULL, 0, NULL);
 
+				cursorXY(_player->getLaser()[i].x, _player->getLaser()[i].y);
+				TextColor(0, 0);
+				cout << "    "; // 레이저 크기(2칸)만큼 공백으로 덮기
+
 				if (daroachLife > 0 && daroachLife < 20)
 				{
 					bossHitEffectTimer = 5;
@@ -466,6 +513,7 @@ void GameManager::BossStage1()
 					_screenDot->StageClear();
 					mciSendString(TEXT("play Kirby_StageClear.wav from 0"), NULL, 0, NULL);
 					Sleep(3000);
+					system("cls");
 					PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 					return;
 				}
@@ -476,37 +524,38 @@ void GameManager::BossStage1()
 
 		vector<BossProjectile>& projectiles = _boss->getBossProjectile();
 
-		if (!playerInvincible)
-		{
-			for (size_t i = 0; i < projectiles.size(); ++i)
-			{
-				if (!projectiles[i].activate)
-				{
-					continue;
-				}
-
-				if (projectiles[i].x >= playerLeft && 
-					projectiles[i].x <= playerRight &&
-					projectiles[i].y >= playerTop &&
-					projectiles[i].y <= playerBottom)
-				{
-					projectiles[i].activate = false;
-					isCollide = true;
-					break;
-				}
-			}
-		}
 
 		// boss 발사체
+		for (size_t i = 0; i < projectiles.size(); ++i)
+		{
+			if (projectiles[i].activate)
+			{
+				cursorXY(projectiles[i].x, projectiles[i].y);
+				TextColor(0, 0);
+				cout << "  ";
+			}
+		}
+		
+		_boss->BossLaserLogic();
 
 		for (size_t i = 0; i < projectiles.size(); ++i)
 		{
 			if (projectiles[i].activate)
 			{
 				cursorXY(projectiles[i].x, projectiles[i].y);
-				TextColor(4, 4);
-				cout << "ㅁ";
+				TextColor(4, 0);
+				cout << "■";
 				TextColor(15, 0);
+
+				if (!playerInvincible &&
+					projectiles[i].x >= playerLeft &&
+					projectiles[i].x <= playerRight &&
+					projectiles[i].y >= playerTop &&
+					projectiles[i].y <= playerBottom)
+				{
+					projectiles[i].activate = false;
+					isCollide = true;
+				}
 			}
 		}
 
@@ -547,6 +596,7 @@ void GameManager::BossStage1()
 				_screenDot->GameOver();
 				mciSendString(TEXT("play Kirby_GameOver.wav from 0"), NULL, 0, NULL);
 				Sleep(4000);
+				system("cls");
 				PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 				break;
 			}
@@ -574,7 +624,6 @@ void GameManager::BossStage1()
 			_dot->PowerUp(35, 45);
 		}
 
-
 		Sleep(10);
 	}
 }
@@ -599,7 +648,7 @@ void GameManager::BossStage2()
 			_player->ActivateSpeedBoost();
 		}
 
-		system("cls");
+		//system("cls");
 
 		HitBox();
 		isCollide = false;
@@ -608,6 +657,17 @@ void GameManager::BossStage2()
 		cursorXY(75, 1);
 		cout << "- 미지의 기사 메타나이트 - ";
 
+		// 잔상 제거
+		if (_boss->isAlive())
+		{
+			TextColor(0, 0);
+			// 메타 나이트의 높이(14)만큼 반복
+			for (int i = 0; i < 14; ++i) {
+				cursorXY(_boss->getX(), _boss->getY() + i);
+				// 메타 나이트의 너비(18)보다 넓게 공백으로 덮기
+				cout << "                                    ";
+			}
+		}
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		{
 			Sleep(100);
@@ -619,7 +679,7 @@ void GameManager::BossStage2()
 		_player->MoveLogic();
 		_player->LaserLogic();
 		_boss->MetaKnight();
-		_boss->BossLaserLogic();
+		//_boss->BossLaserLogic();
 		_boss->UpdatePattern2();
 		_boss->RandMove();
 
@@ -684,6 +744,9 @@ void GameManager::BossStage2()
 			{
 				_player->getLaser()[i].activate = false;
 				mciSendString(TEXT("play Kirby_BossDamage.wav from 0"), NULL, 0, NULL);
+				cursorXY(_player->getLaser()[i].x, _player->getLaser()[i].y);
+				TextColor(0, 0);
+				cout << "    "; // 레이저 크기(2칸)만큼 공백으로 덮기
 
 				if (metaKnightLife > 0 && metaKnightLife < 20)
 				{
@@ -700,8 +763,9 @@ void GameManager::BossStage2()
 					_boss->MetaKnightClear();
 					system("cls");
 					StageClear[3] = true;
-					_screenDot->StageClear();
+					_screenDot->GameOver();
 					mciSendString(TEXT("play Kirby_StageClear.wav from 0"), NULL, 0, NULL);
+					system("cls");
 					Sleep(3000);
 					return;
 				}
@@ -714,23 +778,35 @@ void GameManager::BossStage2()
 
 		vector<BossProjectile>& projectiles = _boss->getBossProjectile();
 
-		if (!playerInvincible)
+		for (size_t i = 0; i < projectiles.size(); ++i)
 		{
-			for (size_t i = 0; i < projectiles.size(); ++i)
+			if (projectiles[i].activate)
 			{
-				if (!projectiles[i].activate)
-				{
-					continue;
-				}
+				cursorXY(projectiles[i].x, projectiles[i].y);
+				TextColor(0, 0);
+				cout << "  ";
+			}
+		}
 
-				if (projectiles[i].x >= playerLeft &&
+		_boss->BossLaserLogic();
+
+		for (size_t i = 0; i < projectiles.size(); ++i)
+		{
+			if (projectiles[i].activate)
+			{
+				cursorXY(projectiles[i].x, projectiles[i].y);
+				TextColor(11, 0);
+				cout << "■";
+				TextColor(15, 0);
+
+				if (!playerInvincible &&
+					projectiles[i].x >= playerLeft &&
 					projectiles[i].x <= playerRight &&
 					projectiles[i].y >= playerTop &&
 					projectiles[i].y <= playerBottom)
 				{
 					projectiles[i].activate = false;
 					isCollide = true;
-					break;
 				}
 			}
 		}
@@ -745,18 +821,6 @@ void GameManager::BossStage2()
 		{
 			isCollide = true;
 		}
-		// boss 발사체
-		for (size_t i = 0; i < projectiles.size(); ++i)
-		{
-			if (projectiles[i].activate)
-			{
-				cursorXY(projectiles[i].x, projectiles[i].y);
-				TextColor(11, 11);
-				cout << "ㅁ";
-				TextColor(15, 0);
-			}
-		}
-
 
 		// metaKnightLife 체력 표기
 		for (int i = 0; i < metaKnightLife + 1; i++)
@@ -795,6 +859,7 @@ void GameManager::BossStage2()
 				_screenDot->GameOver();
 				mciSendString(TEXT("play Kirby_GameOver.wav from 0"), NULL, 0, NULL);
 				Sleep(4000);
+				system("cls");
 				PlaySound(TEXT("Kirby_Main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 				break;
 			}
