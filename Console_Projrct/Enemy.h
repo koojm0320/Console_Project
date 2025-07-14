@@ -33,6 +33,7 @@ public:
 
 
 	bool isAlive() const { return _alive; }
+	void EnemyUpdate();
 	
 
 	Enemy();

@@ -59,7 +59,7 @@ void GameManager::Stage1_1()
 		{
 			_player->ActivateSpeedBoost();
 		}
-		system("cls");
+		//system("cls");
 		HitBox();
 		CollisionDec();
 
@@ -364,7 +364,7 @@ void GameManager::BossStage1()
 			_player->ActivateSpeedBoost();
 		}
 
-		system("cls");
+		//system("cls");
 		HitBox();
 		CollisionDec();
 
@@ -828,9 +828,9 @@ void GameManager::BossStage2()
 void GameManager::HitBox()
 {
 	// player히트박스
-	playerLeft = _player->getX();
+	playerLeft = _player->getX() + 1;
 	playerRight = _player->getX() + 12;
-	playerTop = _player->getY();
+	playerTop = _player->getY() + 1;
 	playerBottom = _player->getY() + 4;
 
 	//// enemy 히트박스
@@ -840,9 +840,9 @@ void GameManager::HitBox()
 	//enemyBottom = _enemy->getY() + 5;
 
 	// Daroach 히트박스
-	daroachLeft = _boss->getX();
+	daroachLeft = _boss->getX() + 1;
 	daroachRight = _boss->getX() + 12;
-	daroachTop = _boss->getY();
+	daroachTop = _boss->getY() + 1;
 	daroachBottom = _boss->getY() + 15;
 
 	// MetaKnight 히트박스

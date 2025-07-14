@@ -16,9 +16,9 @@ void Enemy::EnemySpawnLogic()
 {
 	static int enemySpawnTimer = 0;
 	enemySpawnTimer++;
-	if (enemySpawnTimer >= 50)
+	if (enemySpawnTimer >= 20)
 	{
-		int randY = rand() % 45 + 1;
+		int randY = rand() % 40 + 1;
 		_trashMob.push_back(TrashMob(170, randY));
 		enemySpawnTimer = 0;
 	}
@@ -55,3 +55,7 @@ vector<TrashMob>& Enemy::getTrashMob()
 	return _trashMob;
 }
 
+void Enemy::EnemyUpdate()
+{
+
+}

@@ -3,6 +3,7 @@
 
 Player::Player()
 {
+	_isMove = false;
 	_alive = true;
 	_dot = new Dot;
 	_x = 1;
@@ -19,24 +20,57 @@ void Player::MoveLogic()
 {
 	cursorXY(_x, _y);
 
-	//if (GetAsyncKeyState(VK_SPACE) & 0x8000)
-	//	system("pause");
+	UpdatePlayerMove();
 
 	// player 이동
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000) _x -= 2;
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000) _x += 2;
-	if (GetAsyncKeyState(VK_UP) & 0x8000) --_y;
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000) ++_y;
+	if (_isMove)
+	{
+		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+		{
+			_x -= 2;
+			_dot->kirby(_x, _y);
+		}
+		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+		{
+			_x += 2;
+			_dot->kirby(_x, _y);
+		}
+		if (GetAsyncKeyState(VK_UP) & 0x8000)
+		{
+			--_y;
+			_dot->kirby(_x, _y);
+		}
+		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		{
+			++_y;
+			_dot->kirby(_x, _y);
+		}
+	}
+	else
+	{
+		_dot->kirby(_x, _y);
+	}
 
 	// 플레이어 이동 범위 제한
-	if (_x < 1) _x = 1;
-	if (_x > 166) _x = 166;
+	if (_x + 1 < 1) _x = 2;
+	if (_x + 1 > 166) _x = 167;
 	if (_y < 1) _y = 1;
-	if (_y > 44) _y = 44;
+	if (_y > 42) _y = 42;
 
 	UpdateSkillTimers();
-	_dot->kirby(_x, _y);
+
 	
+}
+
+void Player::UpdatePlayerMove()
+{
+	if (GetAsyncKeyState(VK_LEFT)||
+		GetAsyncKeyState(VK_RIGHT)||
+		GetAsyncKeyState(VK_UP)||
+		GetAsyncKeyState(VK_DOWN))
+	{
+		_isMove = true;
+	}
 }
 
 
@@ -74,7 +108,9 @@ void Player::LaserLogic()
 			cursorXY(_laser[i].x, _laser[i].y);
 			TextColor(6, 6);
 			cout << "ㅁㅁ";
-			TextColor(15, 0);
+			cursorXY(_laser[i].x - 4, _laser[i].y);
+			TextColor(0, 0);
+			cout << "    ";
 		}
 	}
 }

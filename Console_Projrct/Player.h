@@ -19,6 +19,7 @@ private:
 	// 플레이어 생존, 위치
 	int _x, _y;
 	bool _alive;
+	bool _isMove;
 	
 	// 스킬 관련
 	bool _isSpeedUp;
@@ -33,6 +34,9 @@ public:
 	// 플레이어&레이저 이동 및 발사 로직
 	void LaserLogic();
 	void MoveLogic();
+
+	bool isMoved() const { return _isMove; }
+	void UpdatePlayerMove();
 
 	// 플레이어 상태
 	void PlayerHit();
